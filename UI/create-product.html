@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Create Product</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="public/css/font-awesome.min.css">
+  <link rel="stylesheet" href="public/css/main.css">
+</head>
+
+<body>
+  <div id="page-wrapper" class="purchase-page">
+    <header>
+      <span class="logo"></span>
+      <h1 class="header-title white title">Create Product</h1>
+      <div id="sidebar-toggle">
+        <i class="fa fa-navicon"></i>
+      </div>
+    </header>
+
+    <div class="body-container">
+      <div class="sidebar" id="sidebar">
+        <ul class="">
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="all-products.html">All Products</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="purchase.html">Create Sales</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="sale-records.html">Sale Records</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="create-attendant.html">Create Attendant</a>
+          </li>
+          <li class="sidebar--item active">
+            <a class="sidebar--link" href="create-product.html">Create Product</a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+
+        <form action="" class="form">
+          <input type="text" class="form-i" name="name" placeholder="Name" autocomplete="off">
+          <input type="text" class="form-i" name="description" placeholder="Description" autocomplete="off">
+          <input type="number" class="form-i" name="price" placeholder="Price">
+          <input type="number" class="form-i" name="quantity" placeholder="Quantity">
+          <input type="file" name="image" id="">
+          <div class="image-container">
+          </div>
+          <input type="submit" class="btn form-i">
+        </form>
+
+      </div>
+
+
+    </div>
+
+    <div id="product-modal" class="modal-wrapper">
+      <div class="modal-overlay js-hide-modal"></div>
+      <div class="modal-container product-modal">
+        <button class="close-btn js-hide-modal">×</button>
+        <div class="row">
+          <div class="column sm-12 lg-6">
+            <div class="img-area">
+
+            </div>
+          </div>
+          <div class="column sm-12 lg-6">
+            <div class="detail-area">
+              <h2 class="name">Product Name</h2>
+              <div class="info">
+                <p class="description"><b>Description: </b>I did not forget to add a demo description here!</p>
+                <p class="price"><b>Price: </b> $3,000.00</p>
+              </div>
+              <form action="" class="form">
+                <label for="email">Quantity</label>
+                <input type="number" name="quantity" value="1" /> <br><br>
+                <input type="submit" class="btn" value="add to cart">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cart-modal" class="modal-wrapper">
+      <div class="modal-overlay js-hide-modal"></div>
+      <div class="modal-container cart-modal">
+        <!-- <button class="close-btn js-hide-modal">×</button> -->
+        <h2 class="title">Your Cart</h2>
+        <div class="cart-products">
+          <div class="item row">
+            <div class="sm-4 image"></div>
+            <div class="sm-8 info">
+              <p class="name">Item name</p>
+              <p class="quantity">Quantity: 1 <br><br></p>
+              <p class="price">$45</p>
+            </div>
+          </div>
+          <div class="item row">
+            <div class="sm-4 image"></div>
+            <div class="sm-8 info">
+              <p class="name">Item name</p>
+              <p class="quantity">Quantity: 1 <br><br></p>
+              <p class="price">$45</p>
+            </div>
+          </div>
+          <div class="item row">
+            <div class="sm-4 image"></div>
+            <div class="sm-8 info">
+              <p class="name">Item name</p>
+              <p class="quantity">Quantity: 1 <br><br></p>
+              <p class="price">$45</p>
+            </div>
+          </div>
+          <div class="item row">
+            <div class="sm-4 image"></div>
+            <div class="sm-8 info">
+              <p class="name">Item name</p>
+              <p class="quantity">Quantity: 1 <br><br></p>
+              <p class="price">$45</p>
+            </div>
+          </div>
+        </div>
+        <div class="transact">
+          <h3 class="total">Total: $180.00</h3>
+          <button class="btn">Check out</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="public/js/main.js"></script>
+</body>
+
+</html>

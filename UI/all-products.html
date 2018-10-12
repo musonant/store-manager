@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>All Products</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="public/css/font-awesome.min.css">
+  <link rel="stylesheet" href="public/css/main.css">
+</head>
+
+<body>
+  <div id="page-wrapper" class="purchase-page">
+    <header>
+      <span class="logo"></span>
+      <h1 class="header-title white title">All Products</h1>
+      <div id="sidebar-toggle">
+        <i class="fa fa-navicon"></i>
+      </div>
+    </header>
+
+
+    <div class="body-container">
+      <div class="sidebar" id="sidebar">
+        <ul class="">
+          <li class="sidebar--item active">
+            <a class="sidebar--link" href="all-products.html">All Products</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="purchase.html">Create Sales</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="sale-records.html">Sale Records</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="create-attendant.html">Create Attendant</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="create-product.html">Create Product</a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div class="purchase-navigate">
+          <div class="search-box">
+            <input class="search-box--input" type="text" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="Search a product"
+              name="product-search">
+          </div>
+          <div class="links">
+            <select name="category" id="product-category-select">
+              <option value="0">All Categories</option>
+            </select>
+            <!-- <span class="fa fa-cart cart-button" id="cart-button"></span> -->
+          </div>
+        </div>
+
+        <div class="row product-list" id="product-list">
+          <div class="column sm-12 md-4 lg-3 product-item">
+            <div class="product-image" style="background-image: url('public/img/Products/book.jpg')">
+            </div>
+            <div class="product-details">
+              <h3 class="name">Book</h3>
+              <div class="row">
+                <p class="sm-6 price">4000</p>
+                <p class="sm-6 quantity">23 <em>in stock</em></p>
+              </div>
+              <input type="submit" class="btn full-width js-show-product-modal" value="View">
+            </div>
+          </div>
+          <div class="column sm-12 md-4 lg-3 product-item">
+            <div class="product-image" style="background-image: url('public/img/Products/book.jpg')">
+            </div>
+            <div class="product-details">
+              <h3 class="name">Book</h3>
+              <div class="row">
+                <p class="sm-6 price">4000</p>
+                <p class="sm-6 quantity">23 <em>in stock</em></p>
+              </div>
+              <input type="submit" class="btn full-width js-show-product-modal" value="View">
+            </div>
+          </div>
+          <div class="column sm-12 md-4 lg-3 product-item">
+            <div class="product-image" style="background-image: url('public/img/Products/book.jpg')">
+            </div>
+            <div class="product-details">
+              <h3 class="name">Book</h3>
+              <div class="row">
+                <p class="sm-6 price">4000</p>
+                <p class="sm-6 quantity">23 <em>in stock</em></p>
+              </div>
+              <input type="submit" class="btn full-width js-show-product-modal" value="View">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div id="product-modal" class="modal-wrapper">
+    <div class="modal-overlay js-hide-modal"></div>
+    <div class="modal-container product-modal">
+      <button class="close-btn js-hide-modal">×</button>
+      <div class="row">
+        <div class="column sm-12 lg-6">
+          <div class="img-area">
+
+          </div>
+        </div>
+        <div class="column sm-12 lg-6">
+          <div class="detail-area">
+            <h2 class="name">Product Name</h2>
+            <div class="info">
+              <p class="description"><b>Description: </b>I did not forget to add a demo description here!</p>
+              <p class="price"><b>Price: </b> $3,000.00</p>
+              <p class="price"><b>Quantity In Stock: </b> 45</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="public/js/main.js"></script>
+</body>
+
+</html>
