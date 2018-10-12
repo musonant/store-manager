@@ -279,7 +279,6 @@ a {
   margin: auto;
   margin-top: 30px;
   padding: 40px 40px;
-  padding-top: 0px;
 }
 
 .login-container::before {
@@ -292,6 +291,7 @@ a {
   margin-top: -50px;
   box-shadow: 0px 0px 2px 4px #6f5932;
   margin-bottom: 15px;
+  display: none;
 }
 
 .input-div {
@@ -341,6 +341,7 @@ a {
   padding: 10px 20px;
   font-weight: 600;
   width: 100%;
+  display: inline-block;
 }
 .login-submit:active {
   background-color: #502e15;
