@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Profile</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="public/css/font-awesome.min.css">
+  <link rel="stylesheet" href="public/css/main.css">
+</head>
+
+<body>
+  <div id="page-wrapper" class="profile-page">
+    <header class="slim">
+      <span class="logo"></span>
+      <h1 class="white title">Store Manager</h1>
+      <div id="sidebar-toggle">
+        <i class="fa fa-navicon"></i>
+      </div>
+    </header>
+
+    <div class="body-container">
+      <div class="page-title">
+        <h2>Emmanuel Cheng Musonant</h2>
+        <p class="page-tag">~ Profile</p>
+      </div>
+      <div class="content">
+        <div class="table-item">
+          <div class="table-title">
+            <span class="data">Basic Information</span>
+            <button href="#" class="table-edit btn">Edit</button>
+          </div>
+          <table>
+            <tr>
+              <th>User name</th>
+              <td>musonant</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>Emmanuel Osuh</td>
+            </tr>
+            <tr>
+              <th>Initials</th>
+              <td>EO</td>
+            </tr>
+            <tr>
+              <th>Role</th>
+              <td>Sales Attendant</td>
+            </tr>
+          </table>
+
+        </div>
+        <br><br>
+        <div class="table-item">
+          <div class="table-title">
+            <span class="data">Sales Information</span>
+          </div>
+          <table>
+            <tr>
+              <th>Total Sales Records Created</th>
+              <td>14, 000</td>
+            </tr>
+            <tr>
+              <th>Total Number Of Products Sold</th>
+              <td>32, 000</td>
+            </tr>
+            <tr>
+              <th>Total Worth Of Goods Sold</th>
+              <td>$451, 339, 890.33</td>
+            </tr>
+          </table>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div id="product-modal" class="modal-wrapper">
+    <div class="modal-overlay js-hide-modal"></div>
+    <div class="modal-container product-modal">
+      <button class="close-btn js-hide-modal">×</button>
+      <div class="row">
+        <div class="column sm-12 lg-6">
+          <div class="img-area">
+
+          </div>
+        </div>
+        <div class="column sm-12 lg-6">
+          <div class="detail-area">
+            <h2 class="name">Product Name</h2>
+            <div class="info">
+              <p class="description"><b>Description: </b>I did not forget to add a demo description here!</p>
+              <p class="price"><b>Price: </b> $3,000.00</p>
+            </div>
+            <form action="" class="form">
+              <label for="email">Quantity</label>
+              <input type="number" name="quantity" value="1" /> <br><br>
+              <input type="submit" class="btn" value="add to cart">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="modal-wrapper">
+    <div class="modal-overlay js-hide-modal"></div>
+    <div class="modal-container cart-modal">
+      <!-- <button class="close-btn js-hide-modal">×</button> -->
+      <h2 class="title">Your Cart</h2>
+      <div class="cart-products">
+        <div class="item row">
+          <div class="sm-4 image"></div>
+          <div class="sm-8 info">
+            <p class="name">Item name</p>
+            <p class="quantity">Quantity: 1 <br><br></p>
+            <p class="price">$45</p>
+          </div>
+        </div>
+        <div class="item row">
+          <div class="sm-4 image"></div>
+          <div class="sm-8 info">
+            <p class="name">Item name</p>
+            <p class="quantity">Quantity: 1 <br><br></p>
+            <p class="price">$45</p>
+          </div>
+        </div>
+        <div class="item row">
+          <div class="sm-4 image"></div>
+          <div class="sm-8 info">
+            <p class="name">Item name</p>
+            <p class="quantity">Quantity: 1 <br><br></p>
+            <p class="price">$45</p>
+          </div>
+        </div>
+        <div class="item row">
+          <div class="sm-4 image"></div>
+          <div class="sm-8 info">
+            <p class="name">Item name</p>
+            <p class="quantity">Quantity: 1 <br><br></p>
+            <p class="price">$45</p>
+          </div>
+        </div>
+      </div>
+      <div class="transact">
+        <h3 class="total">Total: $180.00</h3>
+        <button class="btn">Check out</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="public/js/main.js"></script>
+</body>
+
+</html>
