@@ -1,1 +1,12 @@
-node_modules
+# Check https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+.nyc_output
+.env
+.coveralls.yml
+
+# folders
+.vscode
+coverage
