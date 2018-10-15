@@ -27,6 +27,11 @@ h2.title {
   margin-right: 35px;
 }
 
+header.slim {
+  height: 30px;
+  font-size: 10px;
+}
+
 .close-btn {
   top: 0px;
   right: -3px;
@@ -412,6 +417,7 @@ header {
   padding: 7px 20px;
   display: inline-block;
   width: 100%;
+  font-size: 14px;
 }
 
 .sidebar.show {
@@ -422,14 +428,14 @@ header {
 }
 
 .sidebar--item {
-  /* padding: 10px 20px; */
-  border-radius: 6px;
+  border-radius: 5px;
   list-style-type: none;
   margin-bottom: 10px;
   background-color: #E2E2CA;
   text-transform: uppercase;
   font-family: "century gothic";
   font-weight: 600;
+  color: #404040;
 }
 
 .sidebar--item:hover {
@@ -437,11 +443,13 @@ header {
 }
 
 .sidebar--item:active {
-  background-color: #bda08b;
+  background-color: #d2b075;
+  color: #fff;
 }
 
 .sidebar--item.active {
-  background-color: #bda08b;  
+  background-color: #d2b075;
+  color: #fff;
 }
 
 .main-content {
@@ -649,15 +657,68 @@ header {
   margin-top: 20px;
 }
 .sale-item {
-  border-left: 4px solid brown;
-  padding-left: 20px;
   margin-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 10px;
 }
-.sale-item .key {
-  color: grey;
+.table-title {
+  padding: 7px 15px;
+  background-color: #4e4e4e;
+  color: #fff;
+  overflow: auto;
+}
+
+table {
+  border: 1px solid #ddd;
+  width: 100%;
+  color: #483e3e;
+}
+.table-item {
+  font-family: "century gothic";
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  text-align: left;
+}
+th, td {
+  padding: 5px 10px;
 }
 
 /* SALES RECORD PAGE ENDS */
+
+/* PROFILE PAGE BEGINS */
+.profile-page .page-title {
+  background: #4e4e4e;
+  color: #fff;
+  font-weight: normal;
+  padding: 10px;
+  font-family: "century gothic";
+}
+.table-edit {
+  float: right;
+  margin: 0;
+  padding: 5px 10px;
+  background-color: #fff;
+  color: black;
+}
+.table-edit:hover {
+  background-color: #eee;
+}
+.profile-page .body-container {
+  margin-top: 30px;
+}
+.profile-page .content {
+  max-width: 800px;
+  padding: 20px;
+  margin-top: 40px;
+  padding-top: 0px;
+}
+
+/* PROFILE PAGE ENDS */
 
 @media only screen and (min-width: 960px) {
   #sidebar-toggle {
@@ -673,7 +734,7 @@ header {
     opacity: 1;
     overflow: auto;
     height: auto;
-    padding: 20px;
+    padding: 20px 15px;
   }
 
   .product-item {
