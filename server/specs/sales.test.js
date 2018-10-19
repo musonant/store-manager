@@ -98,7 +98,6 @@ const salesTests = () => {
             done();
           });
       });
-
       it('Should return sales with satisfactory requirements', (done) => {
         request.get('/api/v1/sales')
           .set('x-access-token', ownerToken)
