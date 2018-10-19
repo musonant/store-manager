@@ -10,6 +10,9 @@
     "lint": "eslint --fix server",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
+  "engines": {
+    "node": "8.9.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/musonant/store-manager.git"

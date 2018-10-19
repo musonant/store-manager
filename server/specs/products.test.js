@@ -77,6 +77,56 @@ const productTests = () => {
         });
     });
   });
+  describe('test case for getting a product', () => {
+    it('Should return products without token', (done) => {
+      request.get('/api/v1/products/1')
+        .expect(401)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('missing token');
+          if (err) done(err);
+          done();
+        });
+    });
+    it('Should not return product on wrong token sent', (done) => {
+      request.get('/api/v1/products/1')
+        .set('x-access-token', wrongToken)
+        .expect(401)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('wrong token');
+          if (err) done(err);
+          done();
+        });
+    });
+    let newProduct = {};
+    before((done) => {
+      const productData = {
+        name: 'New Book',
+        description: 'A new one',
+        quantityInStock: 23,
+        price: 2000,
+        categoryId: 1,
+      };
+      request.post('/api/v1/products')
+        .set('x-access-token', ownerToken)
+        .send(productData)
+        .end((err, res) => {
+          newProduct = res.body.data;
+          if (err) done(err);
+          done();
+        });
+    });
+    it('Should return product on satisfactory requirements', (done) => {
+      newProduct.id = 1;
+      request.get(`/api/v1/products/${newProduct.id}`)
+        .set('x-access-token', attendantToken)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.data.name).to.equal('Book');
+          if (err) done(err);
+          done();
+        });
+    });
+  });
 };
 
 export default productTests;

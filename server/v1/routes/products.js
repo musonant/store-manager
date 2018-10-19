@@ -7,5 +7,6 @@ const productRouter = Router();
 
 productRouter.get('/', ProductController.list);
 productRouter.post('/', AuthToken.authenticate, RoleAuth.isOwner, ProductController.store);
+productRouter.get('/:productId', AuthToken.authenticate, ProductController.retrieve);
 
 export default productRouter;
