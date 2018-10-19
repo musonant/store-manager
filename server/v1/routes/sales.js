@@ -6,5 +6,7 @@ import roleAuth from '../middlewares/roleAuth';
 const salesRouter = Router();
 
 salesRouter.post('/', authToken.authenticate, roleAuth.isAttendant, SalesController.store);
+salesRouter.get('/', authToken.authenticate, roleAuth.isOwner, SalesController.list);
+
 
 export default salesRouter;

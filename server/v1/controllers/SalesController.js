@@ -37,6 +37,22 @@ class SalesController {
       data: sales
     });
   }
+
+  /**
+   * This function handle requests
+   * to the /sales home POST route
+   * @static
+   * @param {Object} req - The request object received
+   * @param {Object} res - The response object to be returned
+   * @returns {Object} - prepared response object
+   * @memberof SalesController
+   */
+  static list(req, res) {
+    return res.status(200).send({
+      message: 'success',
+      data: Sales.getAll()
+    });
+  }
 }
 
 export default SalesController;

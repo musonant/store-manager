@@ -68,6 +68,47 @@ const salesTests = () => {
           });
       });
     });
+    describe('Test case for get all sales', () => {
+      it('Should not get sales if not authenticated', (done) => {
+        request.get('/api/v1/sales')
+          .expect(401)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Failed');
+            if (err) done(err);
+            done();
+          });
+      });
+      it('Should not get sales with wrong token', (done) => {
+        request.get('/api/v1/sales')
+          .set('x-access-token', wrongToken)
+          .expect(401)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('wrong token');
+            if (err) done(err);
+            done();
+          });
+      });
+      it('Should not get sales if not store owner', (done) => {
+        request.get('/api/v1/sales')
+          .set('x-access-token', attendantToken)
+          .expect(401)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('you have to be a store owner to make this request');
+            if (err) done(err);
+            done();
+          });
+      });
+
+      it('Should return sales with satisfactory requirements', (done) => {
+        request.get('/api/v1/sales')
+          .set('x-access-token', ownerToken)
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.data.length > 0).to.equal(true);
+            done(err);
+          });
+      });
+    });
   });
 };
 
