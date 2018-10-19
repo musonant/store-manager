@@ -16,7 +16,8 @@ module.exports = {
 		"comma-dangle": 0,
 		"class-methods-use-this": 0,
 		"curly": ["error", "multi-line"],
-		"import/no-unresolved": [2, { "commonjs": true }],
+    "import/no-unresolved": [2, { "commonjs": true }],
+    "import/named": 0,
 		"no-shadow": ["error", { "allow": ["req", "res", "err"] }],
 		"valid-jsdoc": ["error", {
 			"requireReturn": true,

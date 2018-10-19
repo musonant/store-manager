@@ -42,7 +42,7 @@ export default class Model {
    */
   create(data) {
     const newResource = {};
-    newResource.id = this.getLastId();
+    newResource.id = this.getLastId() + 1;
 
     this.fields.forEach((field) => {
       if (field !== 'id') {

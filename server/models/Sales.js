@@ -17,6 +17,7 @@ export default class Sales extends Model {
   constructor() {
     const fields = ['id', 'attendantId', 'customerName', 'createdAt', 'totalPay'];
     super(records, fields);
+    this.productPivot = saleProduct;
   }
 
   /**
@@ -27,7 +28,7 @@ export default class Sales extends Model {
    * @returns {Array} - the array of products contained in the sale
    */
   getProducts(salesId) {
-    const sales = saleProduct.filter(item => item.salesId === salesId);
+    const sales = this.productPivot.filter(item => item.salesId === salesId);
     const productIdArray = [];
     sales.forEach((item) => {
       productIdArray.push(item.productId);
