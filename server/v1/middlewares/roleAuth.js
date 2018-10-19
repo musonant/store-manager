@@ -22,7 +22,6 @@ class RoleAuth {
    */
   static isOwner(req, res, next) {
     const { userId } = req.decoded;
-    console.log(userId);
     const user = User.findById(userId);
 
     if (user.userType !== 'store_owner') {
@@ -63,7 +62,7 @@ class RoleAuth {
    * This makes sure the user is the same as the sale attendant
    * who created the sale
    * @static
-   * @param {Object} req - the request received 
+   * @param {Object} req - the request received
    * @param {Object} res - the response to be returned
    * @param {Object} next - the next function to be called after this authentication
    * @returns {Object} - error message indicating authentication failure
@@ -75,7 +74,7 @@ class RoleAuth {
     const user = User.findById(userId);
     const sales = Sales.findById(salesId);
 
-    if((user.id === sales.attendantId) || user.userType !== 'store_owner') {
+    if ((user.id === sales.attendantId) || user.userType !== 'store_owner') {
       req.user = user;
       next();
     } else {

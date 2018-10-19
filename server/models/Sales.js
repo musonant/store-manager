@@ -22,21 +22,22 @@ export default class Sales extends Model {
   /**
    * This function gets all the products
    * attached to the sale with the specified id
-   * 
+   *
    * @param {Number} salesId - the id of the sales
    * @returns {Array} - the array of products contained in the sale
    */
   getProducts(salesId) {
-    let sales = saleProduct.filter(item => item.salesId === salesId);
-    let productIdArray = [];
+    const sales = saleProduct.filter(item => item.salesId === salesId);
+    const productIdArray = [];
     sales.forEach((item) => {
       productIdArray.push(item.productId);
-    })
+    });
 
-    let productsArray = [];
-    for (const id of productIdArray) {
+    const productsArray = [];
+
+    productIdArray.forEach((id) => {
       productsArray.push(products.find(item => item.id === id));
-    }
+    });
 
     return productsArray;
   }

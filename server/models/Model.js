@@ -50,11 +50,11 @@ export default class Model {
       }
       if (field === 'created_at') {
         // this value should be replaced with the current time
-        newResource[field] = null;
+        newResource[field] = new Date();
       }
       if (field === 'updated_at') {
         // this value should be replaced with the current time
-        newResource[field] = null;
+        newResource[field] = new Date();
       }
     });
 
@@ -88,12 +88,12 @@ export default class Model {
    * @memberof Model
    */
   delete(id) {
-    const newResource = this.table.filter(item => item.id !== id);
+    const newRecords = this.records.filter(item => item.id !== id);
 
-    if (newResource.length === this.table) {
+    if (newRecords.length === this.records) {
       return false;
     }
-    this.table = newResource;
+    this.records = newRecords;
     return true;
   }
 
@@ -102,7 +102,7 @@ export default class Model {
    * @memberof Model
    */
   getLastId() {
-    const lastItem = this.table[this.table.length - 1];
+    const lastItem = this.records[this.records.length - 1];
     return lastItem.id;
   }
 }
