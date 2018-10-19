@@ -19,5 +19,27 @@ describe('All test cases for Store Manager API', () => {
           done();
         });
     });
+    it('Should load API Home', (done) => {
+      request.get('/api/v1')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('Store Manger API V1');
+          if (err) done(err);
+          done();
+        });
+    });
+  });
+  describe('test case for loading products page', () => {
+    it('Should return all products', (done) => {
+      request.get('/api/v1/products')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('success');
+          if (err) done(err);
+          done();
+        });
+    });
   });
 });
