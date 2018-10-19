@@ -7,19 +7,18 @@ engines:
   eslint:
     enabled: true
     checks:
-      Similar code:
-        enabled: false
-      import/extensions:
+      similar-code:
         enabled: false
   fixme:
     enabled: true
-ratings:
-  paths:
-  - "server/*.js"
-  - "server/**/*.js"
-exclude_paths:
-- node_modules/
-- .nyc_output
-- coverage
-- server/specs/
-- UI/
+    config:
+      strings:
+      - FIXME
+      - BUG
+      - CUSTOM
+exclude_patherns:
+- "node_modules/"
+- ".nyc_output"
+- "coverage"
+- "server/specs/"
+- ".vscode"

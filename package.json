@@ -1,11 +1,10 @@
 {
   "name": "store-manager",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store",
   "scripts": {
-    "start": "babel-node -- server/app.js",
-    "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
+    "start": "babel-node ./bin/www",
+    "start:dev": "nodemon --exec babel-node ./bin/www",
     "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
     "build": "cross-env NODE_ENV=production&&  ",
     "lint": "eslint --fix server",
