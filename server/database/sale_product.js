@@ -1,6 +1,6 @@
 /**
  * mimicking a pivot table -
- * showing the many - many relationship between 
+ * showing the many - many relationship between
  * the sales resource and the products resource
  */
 const saleProduct = [

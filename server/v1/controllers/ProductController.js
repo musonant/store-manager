@@ -23,6 +23,23 @@ class ProductController {
       data: Product.getAll()
     });
   }
+
+  /**
+   *
+   * @static
+   * @param {Object} req - The request object received
+   * @param {Object} res - The response object to be returned
+   * @returns {Object} - prepared response object
+   * @memberof ProductController
+   */
+  static store(req, res) {
+    const product = Product.create(req.body);
+
+    return res.status(200).send({
+      message: 'success',
+      data: product
+    });
+  }
 }
 
 export default ProductController;
