@@ -30,11 +30,12 @@ The application is hosted online on gh-pages with
 
 
 ## Features
-- View all Products
-- Add Products
-- Add Sale Record
-- Get all Sales Record
+- Get all Products
 - Get a specific Product
+- Get all Sales Record
+- Get a specific Sale Record
+- Create Products
+- Create Sale Record
 
 
 ## Getting Started
@@ -48,17 +49,17 @@ The application is hosted online on gh-pages with
 <table>
 <tr><th>HTTP VERB</th><th>ENDPOINT</th><th>TASK</th></tr>
 
-<tr><td>GET</td> <td>api/v1/products</td> <td> Fetch all Products</td></tr>
+<tr><td>GET</td> <td>api/v1/products</td> <td> Get all Products</td></tr>
 
-<tr><td>GET</td> <td>api/v1/products/:productId</td> <td> Fetch a single Product</td></tr>
+<tr><td>GET</td> <td>api/v1/products/:productId</td> <td> Get a single Product</td></tr>
 
-<tr><td>GET</td> <td>api/v1/sales</td> <td> Fetch all Sales </td></tr>
+<tr><td>GET</td> <td>api/v1/sales</td> <td> Get all Sales </td></tr>
 
-<tr><td>GET</td> <td>api/v1/sales/:saleId</td> <td> Fetch a single sale record</td></tr> 
+<tr><td>GET</td> <td>api/v1/sales/:saleId</td> <td> Get a single sale record</td></tr> 
 
 <tr><td>POST</td> <td>api/v1/products</td> <td> Create a Product </td></tr>
 
-<tr><td>POST</td> <td>api/v1/sales</td> <td> Add a new Sale record </td></tr>
+<tr><td>POST</td> <td>api/v1/sales</td> <td> Create a new Sale record </td></tr>
 
 
 </table>
