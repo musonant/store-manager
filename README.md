@@ -1,4 +1,4 @@
-# My Diary
+# Store Manager
 [![Build Status](https://travis-ci.org/musonant/store-manager.svg?branch=api)](https://travis-ci.org/musonant/store-manager)
 [![Coverage Status](https://coveralls.io/repos/github/musonant/store-manager/badge.svg)](https://coveralls.io/github/musonant/store-manager)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f80a67e8dede565b1662/maintainability)](https://codeclimate.com/github/musonant/store-manager/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/f80a67e8dede565b1662/test_coverage)](https://codeclimate.com/github/musonant/store-manager/test_coverage)
@@ -39,11 +39,9 @@ The application is hosted online on gh-pages with
 
 ## Getting Started
 ### Installation
-- install npm installl
- app
-- Install, composer
+- install npm install
 - install POSTMAN app
-- run `npm run start:dev` then navigate to `localhost:3000` on POSTMAN
+- run `npm run start:dev` then navigate to `localhost:8000` on POSTMAN
 
 
 ### API Endpoint Route 
