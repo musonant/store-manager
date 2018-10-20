@@ -48,20 +48,17 @@ The application is hosted online on gh-pages with
 <table>
 <tr><th>HTTP VERB</th><th>ENDPOINT</th><th>TASK</th></tr>
 
-<tr><td>POST</td> <td>api/v1/auth/signup</td> <td> Register user</td></tr>
+<tr><td>GET</td> <td>api/v1/products</td> <td> Fetch all Products</td></tr>
 
-<tr><td>POST</td> <td>api/v1/auth/signin</td> <td> Login user</td></tr>
+<tr><td>GET</td> <td>api/v1/products/:productId</td> <td> Fetch a single Product</td></tr>
 
-<tr><td>GET</td> <td>api/v1/products</td> <td> Fetch all projects</td></tr>
+<tr><td>GET</td> <td>api/v1/sales</td> <td> Fetch all Sales </td></tr>
 
-<tr><td>GET</td> <td>api/v1/products/:productId</td> <td> Fetch a single product</td></tr>
+<tr><td>GET</td> <td>api/v1/sales/:saleId</td> <td> Fetch a single sale record</td></tr> 
 
-<tr><td>POST</td> <td>api/v1/products</td> <td> Add new Product </td></tr>
+<tr><td>POST</td> <td>api/v1/products</td> <td> Create a Product </td></tr>
 
-<tr><td>PUT</td> <td>api/v1/products/productId</td> <td> Modify a product</td></tr>
-
-<tr><td>DELETE</td> <td>api/v1/products/entryId</td> <td> Delete a product</td></tr>
-
+<tr><td>POST</td> <td>api/v1/sales</td> <td> Add a new Sale record </td></tr>
 
 
 </table>
