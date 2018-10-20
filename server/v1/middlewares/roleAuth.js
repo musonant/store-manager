@@ -74,7 +74,7 @@ class RoleAuth {
     const user = User.findById(userId);
     const sales = Sales.findById(salesId);
 
-    if ((user.id === sales.attendantId) || user.userType !== 'store_owner') {
+    if ((user.id === sales.attendantId) || user.userType === 'store_owner') {
       req.user = user;
       next();
     } else {

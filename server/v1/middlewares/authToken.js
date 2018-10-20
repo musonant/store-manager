@@ -23,7 +23,7 @@ class AuthToken {
     if (token) {
       if (!tokenFound) {
         res.status(401).send({
-          status: 'failed',
+          status: 'Failed',
           message: 'wrong token'
         });
       } else {
@@ -32,7 +32,7 @@ class AuthToken {
       }
     } else {
       res.status(401).send({
-        status: 'failed',
+        status: 'Failed',
         message: 'missing token'
       });
     }

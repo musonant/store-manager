@@ -4,7 +4,6 @@ import Model from '../../models/Model';
 
 
 const records = [{ id: 1, username: 'musonant' }, { id: 2, username: 'musonant2' }];
-
 const fields = ['id', 'username'];
 const model = new Model(records, fields);
 
