@@ -7,8 +7,8 @@ const request = supertest(app);
 
 const wrongToken = 'OPsdecedsaec00e2349__dL';
 const attendantToken = 'OPsdecedsaec00e23490LdL';
-// const wrongAttendantToken = 'KLcxdwedsaecd3e23490LdL';
-// const attendantSaleId = 1;
+const wrongAttendantToken = 'KLcxdwedsaecd3e23490LdL';
+const attendantSaleId = 1;
 const ownerToken = 'xcmr2ewesaec00e23490LdL';
 
 const salesTests = () => {
@@ -104,6 +104,46 @@ const salesTests = () => {
           .expect(200)
           .end((err, res) => {
             expect(res.body.data.length > 0).to.equal(true);
+            done(err);
+          });
+      });
+    });
+    describe('Test case for get a specific sales', () => {
+      it('Should not get sale record if not authenticated', (done) => {
+        request.get(`/api/v1/sales/${attendantSaleId}`)
+          .expect(401)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Failed');
+            if (err) done(err);
+            done();
+          });
+      });
+      it('Should not get sale record with wrong token', (done) => {
+        request.get(`/api/v1/sales/${attendantSaleId}`)
+          .set('x-access-token', wrongToken)
+          .expect(401)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('wrong token');
+            if (err) done(err);
+            done();
+          });
+      });
+      it('Should not get sale record if not store owner AND not sale creator', (done) => {
+        request.get(`/api/v1/sales/${attendantSaleId}`)
+          .set('x-access-token', wrongAttendantToken)
+          .expect(403)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('You cannot access this resource');
+            if (err) done(err);
+            done();
+          });
+      });
+      it('Should return sale record on satisfactory requirements', (done) => {
+        request.get(`/api/v1/sales/${attendantSaleId}`)
+          .set('x-access-token', attendantToken)
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.data.id).to.equal(attendantSaleId);
             done(err);
           });
       });
