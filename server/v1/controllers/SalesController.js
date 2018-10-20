@@ -53,6 +53,31 @@ class SalesController {
       data: Sales.getAll()
     });
   }
+
+  /**
+   *
+   * @static
+   * @param {Object} req - The request object received
+   * @param {Object} res - The response object to be returned
+   * @returns {Object} - prepared response object
+   * @memberof SalesController
+   */
+  static retrieve(req, res) {
+    const salesId = Number(req.params.salesId);
+    const sales = Sales.findById(salesId);
+
+    sales.products = Sales.getProducts(salesId);
+
+    if (!sales) {
+      return res.status(404).send({
+        message: 'Not Found'
+      });
+    }
+    return res.status(200).send({
+      message: 'success',
+      data: sales
+    });
+  }
 }
 
 export default SalesController;
