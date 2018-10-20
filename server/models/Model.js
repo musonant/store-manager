@@ -58,6 +58,8 @@ export default class Model {
       }
     });
 
+    this.records.push(newResource);
+
     return newResource;
   }
 
@@ -78,6 +80,15 @@ export default class Model {
     });
 
     foundResource = updatedResource;
+
+    // update the records
+    const newRecords = this.records.map((item) => {
+      if (item.id === updatedResource.id) {
+        return updatedResource;
+      }
+      return item;
+    });
+    this.records = newRecords;
 
     return foundResource;
   }
