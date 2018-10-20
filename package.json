@@ -23,6 +23,7 @@
     "url": "https://github.com/musonant/store-manager/issues"
   },
   "homepage": "https://github.com/musonant/store-manager#readme",
+  "apiServer": "https://musonant-store-manager.herokuapp.com/api/v1",
   "dependencies": {
     "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
