@@ -22,7 +22,7 @@ Store Manger - is store managment app which is meant to be used in one store.
 The Store Manger project is broken down into small task with pivotal tracker board. The link to the relevant Pivoltal tracker board is (https://www.pivotaltracker.com/n/projects/2203434)
 
 ### API Enpoint
-API Endpoints is hosted at (https://your-https://musonant-store-manager.herokuapp.com/api/v1diary.herokuapp.com/api/v1)
+API Endpoints is hosted at (https://musonant-store-manager.herokuapp.com/api/v1)
 
 ### UI Templates
 The application is hosted online on gh-pages with 
