@@ -1,7 +1,8 @@
 # Store Manager
 [![Build Status](https://travis-ci.org/musonant/store-manager.svg?branch=api)](https://travis-ci.org/musonant/store-manager)
 [![Coverage Status](https://coveralls.io/repos/github/musonant/store-manager/badge.svg?branch=master)](https://coveralls.io/github/musonant/store-manager?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f80a67e8dede565b1662/maintainability)](https://codeclimate.com/github/musonant/store-manager/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/f80a67e8dede565b1662/test_coverage)](https://codeclimate.com/github/musonant/store-manager/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f80a67e8dede565b1662/maintainability)](https://codeclimate.com/github/musonant/store-manager/maintainability)[![Test Coverage]
+(https://api.codeclimate.com/v1/badges/f80a67e8dede565b1662/test_coverage)](https://codeclimate.com/github/musonant/store-manager/test_coverage)
 
 ## Description
 Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store.
