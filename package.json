@@ -5,7 +5,7 @@
   "scripts": {
     "start": "babel-node ./bin/www",
     "start:dev": "nodemon --exec babel-node ./bin/www",
-    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "test": "cross-env NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compiler js:babel-register  server/specs/",
     "build": "cross-env NODE_ENV=production&&  ",
     "lint": "eslint --fix server",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
@@ -27,6 +27,10 @@
     "apiServer": "https://musonant-store-manager.herokuapp.com/api/v1",
     "pivotalTrackerProject": "https://www.pivotaltracker.com/projects/2203434/"
   },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
+  },
   "dependencies": {
     "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
@@ -47,6 +51,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-istanbul": "^5.1.0",
     "babel-preset-env": "^1.7.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
