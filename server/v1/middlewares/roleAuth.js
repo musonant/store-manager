@@ -72,15 +72,23 @@ class RoleAuth {
     const { userId } = req.decoded;
     const salesId = Number(req.params.salesId);
     const user = User.findById(userId);
-    const sales = Sales.findById(salesId);
+    const sale = Sales.findById(salesId);
 
-    if ((user.id === sales.attendantId) || user.userType === 'store_owner') {
-      req.user = user;
-      next();
+    if (sale) {
+      if ((user.id === sale.attendantId) || user.userType === 'store_owner') {
+        req.user = user;
+        req.sale = sale;
+        next();
+      } else {
+        res.status(403).send({
+          status: 'Failed',
+          message: 'You cannot access this resource'
+        });
+      }
     } else {
-      res.status(403).send({
+      res.status(404).send({
         status: 'Failed',
-        message: 'You cannot access this resource'
+        message: 'Not Found'
       });
     }
   }
