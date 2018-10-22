@@ -21,20 +21,20 @@ class SalesController {
     const { user } = req;
     const data = req.body;
     data.attendantId = user.id;
-    const sales = Sales.create(data);
+    const sale = Sales.create(data);
 
     if (data.orders !== undefined) {
       data.orders.forEach((item) => {
-        item.salesId = sales.id;
+        item.salesId = sale.id;
         Sales.productPivot.push(item);
       });
     }
 
-    sales.products = Sales.getProducts(sales.id);
+    sale.products = Sales.getProducts(sale.id);
 
     res.status(200).send({
       status: 'Success',
-      data: sales
+      data: sale
     });
   }
 
@@ -63,19 +63,13 @@ class SalesController {
    * @memberof SalesController
    */
   static retrieve(req, res) {
-    const salesId = Number(req.params.salesId);
-    const sales = Sales.findById(salesId);
+    const { sale } = req;
 
-    sales.products = Sales.getProducts(salesId);
+    sale.products = Sales.getProducts(sale.id);
 
-    if (!sales) {
-      return res.status(404).send({
-        message: 'Not Found'
-      });
-    }
     return res.status(200).send({
       message: 'success',
-      data: sales
+      data: sale
     });
   }
 }

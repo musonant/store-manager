@@ -10,10 +10,12 @@ import products from '../database/products';
 export default class Product extends Model {
   /**
    * Creates an instance of Product.
+   * @param {Array} records - List of existing records
+   * @param {Array} fields - List of table fields
    * @memberof Product
    */
   constructor() {
-    const fields = ['id', 'name', 'quantityStocked', 'categoryId', 'price'];
+    const fields = ['id', 'name', 'quantityStocked', 'categoryId', 'price', 'createdAt', 'updatedAt'];
     super(products, fields);
   }
 }

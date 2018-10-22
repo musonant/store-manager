@@ -1,6 +1,9 @@
 import { describe } from 'mocha';
 import { expect } from 'chai';
 import Model from '../../models/Model';
+import User from '../../models/User';
+import Sales from '../../models/Sales';
+import Product from '../../models/Product';
 
 
 const records = [{ id: 1, username: 'musonant' }, { id: 2, username: 'musonant2' }];
@@ -31,6 +34,20 @@ const modelTests = () => {
       const record = records[0];
       const result = model.delete(record.id);
       expect(result).to.equal(true);
+    });
+    it('should fail to delete a record not found', () => {
+      const result = model.delete(0);
+      expect(result).to.equal(false);
+    });
+
+
+    describe('All App Models should instantiate with no errors', () => {
+      const sale = new Sales();
+      const user = new User();
+      const product = new Product();
+      expect(sale).to.not.equal(undefined);
+      expect(user).to.not.equal(undefined);
+      expect(product).to.not.equal(undefined);
     });
   });
 };

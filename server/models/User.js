@@ -13,7 +13,7 @@ export default class User extends Model {
    * @memberof User
    */
   constructor() {
-    const fields = ['id', 'userType', 'email'];
+    const fields = ['id', 'userType', 'email', 'createdAt', 'updatedAt'];
     super(users, fields);
   }
 }

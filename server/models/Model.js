@@ -48,11 +48,11 @@ export default class Model {
       if (field !== 'id') {
         newResource[field] = data[field];
       }
-      if (field === 'created_at') {
+      if (field === 'createdAt') {
         // this value should be replaced with the current time
         newResource[field] = new Date();
       }
-      if (field === 'updated_at') {
+      if (field === 'updatedAt') {
         // this value should be replaced with the current time
         newResource[field] = new Date();
       }
@@ -101,7 +101,7 @@ export default class Model {
   delete(id) {
     const newRecords = this.records.filter(item => item.id !== id);
 
-    if (newRecords.length === this.records) {
+    if (newRecords.length === this.records.length) {
       return false;
     }
     this.records = newRecords;
