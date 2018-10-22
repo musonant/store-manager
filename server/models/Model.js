@@ -12,7 +12,7 @@ export default class Model {
    * @param {Array} fields - an array of attributes defining the resource
    * @memberof Model
    */
-  constructor(records, fields) {
+  constructor(records = null, fields = null) {
     this.records = records;
     this.fields = fields;
   }
@@ -70,16 +70,18 @@ export default class Model {
    * @memberof Model
    */
   update(id, data) {
-    let foundResource = this.records.find(item => item.id === id);
-    const updatedResource = foundResource;
+    const foundResource = this.records.find(item => item.id === id);
+    const updatedResource = { id: foundResource.id };
 
     this.fields.forEach((field) => {
       if (field !== 'id') {
-        updatedResource[field] = data[field] || foundResource[field];
+        if (data[field]) {
+          updatedResource[field] = data[field];
+        } else {
+          updatedResource[field] = foundResource[field];
+        }
       }
     });
-
-    foundResource = updatedResource;
 
     // update the records
     const newRecords = this.records.map((item) => {
@@ -90,7 +92,7 @@ export default class Model {
     });
     this.records = newRecords;
 
-    return foundResource;
+    return updatedResource;
   }
 
   /**

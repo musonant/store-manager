@@ -32,6 +32,18 @@ const salesTests = () => {
             done();
           });
       });
+      it('Should return error when request is missing orders', (done) => {
+        const badSalesData = { customerName: 'James Arthur', totalPay: 2300 };
+        request.post('/api/v1/sales')
+          .set('x-access-token', attendantToken)
+          .send(badSalesData)
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('Your request is missing orders');
+            if (err) done(err);
+            done();
+          });
+      });
       it('Should not create sales with wrong token', (done) => {
         request.post('/api/v1/sales')
           .set('x-access-token', wrongToken)

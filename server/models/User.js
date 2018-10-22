@@ -1,5 +1,5 @@
 import Model from './Model';
-import users from '../database/users';
+import userSchema from '../migrations/users';
 
 /**
  * Handles data requests for the User resource
@@ -11,9 +11,12 @@ export default class User extends Model {
   /**
    * Creates an instance of User.
    * @memberof User
+   * @param {Array} records - List of existing records
+   * @param {Array} fields - List of table fields
    */
-  constructor() {
-    const fields = ['id', 'userType', 'email', 'createdAt', 'updatedAt'];
-    super(users, fields);
+  constructor(records, fields) {
+    records = records || userSchema.records;
+    fields = fields || userSchema.fields;
+    super(records, fields);
   }
 }

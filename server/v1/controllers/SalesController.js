@@ -22,17 +22,22 @@ class SalesController {
     const data = req.body;
     data.attendantId = user.id;
     const sale = Sales.create(data);
+    // const missingOrders = data.orders === undefined;
 
     if (data.orders !== undefined) {
       data.orders.forEach((item) => {
         item.salesId = sale.id;
         Sales.productPivot.push(item);
       });
+    } else {
+      return res.status(400).send({
+        message: 'Your request is missing orders'
+      });
     }
 
     sale.products = Sales.getProducts(sale.id);
 
-    res.status(200).send({
+    return res.status(200).send({
       status: 'Success',
       data: sale
     });
