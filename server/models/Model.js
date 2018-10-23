@@ -12,7 +12,7 @@ export default class Model {
    * @param {Array} fields - an array of attributes defining the resource
    * @memberof Model
    */
-  constructor(records = null, fields = null) {
+  constructor(records, fields) {
     this.records = records;
     this.fields = fields;
   }

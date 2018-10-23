@@ -14,9 +14,7 @@ export default class User extends Model {
    * @param {Array} records - List of existing records
    * @param {Array} fields - List of table fields
    */
-  constructor(records, fields) {
-    records = records || userSchema.records;
-    fields = fields || userSchema.fields;
+  constructor(records = userSchema.records, fields = userSchema.fields) {
     super(records, fields);
   }
 }

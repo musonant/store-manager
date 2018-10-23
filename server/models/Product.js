@@ -14,11 +14,7 @@ export default class Product extends Model {
    * @param {Array} fields - List of table fields
    * @memberof Product
    */
-  constructor(records = null, fields = null) {
-    records = records || productSchema.records;
-    fields = fields || productSchema.fields;
-    this.records = records;
-    this.fields = fields;
+  constructor(records = productSchema.records, fields = productSchema.fields) {
     super(records, fields);
   }
 }

@@ -16,9 +16,7 @@ export default class Sales extends Model {
    * @param {Array} records - List of existing records
    * @param {Array} fields - List of table fields
    */
-  constructor(records = null, fields = null) {
-    records = records || saleSchema.records;
-    fields = fields || saleSchema.fields;
+  constructor(records = saleSchema.records, fields = saleSchema.fields) {
     super(records, fields);
     this.productPivot = saleProduct;
   }
