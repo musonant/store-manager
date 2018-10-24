@@ -4,6 +4,94 @@
   box-sizing: border-box;
 }
 
+.cta {
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.highlighted {
+  background-color: #c2d2f5;
+}
+/* LANDING PAGE STYLES BEGINS */
+
+.landing-info .title {
+  line-height: 60px;
+}
+
+
+header.main {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+  font-size: 20px;
+  font-family: "Century Gothic";
+  position: static;
+}
+.brand {
+  display: flex;
+  flex-direction: row;
+  text-transform: uppercase;
+}
+.actions {
+
+}
+header .link {
+  list-style-type: none;
+}
+.logo {
+  margin-right: 10px;
+}
+.sales-points {
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+.sales-points .pair {
+  margin-bottom: 40px;
+}
+.sales-points .detail {
+  padding: 40px;
+  line-height: 20px;
+  color: #383737;
+}
+
+.sales-points .detail:before {
+  content: '"';
+  font-size: 30px;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-align: left;
+  display: block;
+  margin-left: -20px;
+}
+
+.point {
+  padding: 30px;
+  border: 1px solid #ddd;
+  padding-top: 0px;
+}
+.point p {
+  margin-top: -10px;
+}
+.point-icon:before {
+  font-size: 30px;
+  font-weight: bold;
+  display: block;
+  margin-top: -60px;
+  color: #c2d2f5;
+  background: #fff;
+}
+.landing-info {
+  text-align: center;
+  padding: 20px;
+  font-size: 22px;
+}
+
+
+
+/* LANDING PAGE STYLES ENDS */
+
 h1.title {
   font-family: "Century Gothic";
   font-weight: 600;
@@ -719,6 +807,29 @@ th, td {
 }
 
 /* PROFILE PAGE ENDS */
+
+
+@media only screen and (min-width: 560px) {
+  .sales-points .pair {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .sales-points .detail {
+    width: 400px;
+    padding-top: 0px;
+  }
+  .sales-points .point {
+    width: 300px;
+    height: 120px;
+  }
+
+}
+
 
 @media only screen and (min-width: 960px) {
   #sidebar-toggle {
