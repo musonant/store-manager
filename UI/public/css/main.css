@@ -4,6 +4,31 @@
   box-sizing: border-box;
 }
 
+.prf-image {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #aaa;
+  margin-right: 5px;
+}
+.profile-settings .profile-info {
+  display: none;
+}
+.profile-settings {
+  color: #fff;
+}
+.profile-settings:hover {
+  cursor: pointer;
+}
+.profile-settings .icon {
+  font-size: 18px;
+  margin-left: 5px;
+}
+.profile-settings .row {
+  align-items: center;
+}
 .main-heading {
   font-size: 40px;
   text-align: center;
@@ -20,6 +45,67 @@
   height: 4px;
   background: #f9cc8b;
 }
+
+
+.tag {
+  display: inline-block;
+  padding: 5px;
+  background-color: #ccc;
+  border-radius: 3px;
+}
+.tag:hover {
+  background-color: #aaa;
+}
+
+.dropdown.active .icon {
+  transform: rotate(180deg);
+}
+
+.profile-settings {
+  position: absolute;
+  right: 30px;
+}
+
+.dropdown {
+  position: relative;
+  margin-left: auto;
+}
+.dropdown .icon {
+  transition: all 300ms ease;
+}
+
+.dropdown-menu {
+  background-color: #fff;
+  padding: 10px;
+  position: absolute;
+  width: 150px;
+  border: 1px solid #aaa;
+  opacity: 0;
+  height: auto;
+  overflow: hidden;
+  right: -20px;
+  top: 31px;
+  transition: top 300ms ease-in-out, opacity 400ms ease-in-out;
+}
+.dropdown-menu .item {
+  color: #000;
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.dropdown-menu .item:hover {
+  color: brown;
+}
+
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  top: 60px;
+}
+
+li {
+  list-style-type: none;
+}
+
 
 .cta {
   font-size: 15px;
@@ -540,7 +626,7 @@ header {
 #sidebar-toggle {
   position: absolute;
   top: 15px;
-  right: 20px;
+  left: 20px;
   font-size: 30px;
   color: white;
 }
@@ -853,7 +939,9 @@ th, td {
   font-weight: normal;
   padding: 10px;
   font-family: "gothic";
+  margin-top: 60px;
 }
+
 .table-edit {
   float: right;
   margin: 0;
@@ -936,6 +1024,10 @@ footer {
   .hero-title {
     font-size: 60px;
     line-height: 90px;
+  }
+
+  .profile-settings .profile-info {
+    display: flex;
   }
 }
 

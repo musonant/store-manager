@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Purchase Products</title>
   <meta name="description" content="">
+  <link rel="stylesheet" href="public/css/fonts.css">
   <link rel="stylesheet" href="public/css/font-awesome.min.css">
   <link rel="stylesheet" href="public/css/main.css">
 </head>
@@ -16,6 +17,29 @@
     <header>
       <span class="logo"></span>
       <h1 class="header-title white title">Purchase Products</h1>
+      <div class="profile-settings">
+        <div class="dropdown">
+          <div class="row">
+            <div class="profile-photo">
+              <div class="prf-image" style="background-image: url('public/img/users/cheng.png')"></div>
+            </div>
+            <div class="profile-info">
+              <h3>James Fellony</h3>
+              <i class="fa fa-caret-down icon"></i>
+            </div>
+          </div>
+          <div class="dropdown-menu">
+            <li>
+              <!-- <i class="fa fa-gears icon"></i> -->
+              <a href="#" class="item">Settings</a>
+            </li>
+            <li><a href="#" class="item">My Account</a></li>
+            <li><a href="attendant-profile.html" class="item">Profile</a></li>
+            <li><a href="#" class="item">Logout</a></li>
+          </div>
+        </div>
+
+      </div>
       <div id="sidebar-toggle">
         <i class="fa fa-navicon"></i>
       </div>
@@ -38,6 +62,9 @@
           </li>
           <li class="sidebar--item">
             <a class="sidebar--link" href="create-product.html">Create Product</a>
+          </li>
+          <li class="sidebar--item">
+            <a class="sidebar--link" href="all-attendants.html">All Attendants</a>
           </li>
         </ul>
       </div>
