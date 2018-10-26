@@ -86,6 +86,7 @@
   right: -20px;
   top: 31px;
   transition: top 300ms ease-in-out, opacity 400ms ease-in-out;
+  visibility: hidden;
 }
 .dropdown-menu .item {
   color: #000;
