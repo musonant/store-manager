@@ -18,14 +18,14 @@ dotenv.config();
 
 class DB {
   constructor() {
-    this.pool = new Pool({
+    this.connection = new Pool({
       connectionString: process.env.TEST_DATABASE_URL,
     });
   }
 
   async createTables() {
     debug('CONNECTING TO DATABASE');
-    this.pool.on('connect', () => {
+    this.connection.on('connect', () => {
       debug('CONNECTED TO DATABASE');
     });
 
@@ -80,9 +80,9 @@ class DB {
       );
     `;
 
-    const res = await this.pool.query(queryText);
+    const res = await this.connection.query(queryText);
     debug('QUERY COMPLETED', res);
-    await this.pool.end();
+    await this.connection.end();
   }
 }
 

@@ -10,11 +10,11 @@ import productSchema from '../migrations/products';
 export default class Product extends Model {
   /**
    * Creates an instance of Product.
-   * @param {Array} records - List of existing records
+   * @param {String} table - Resource table name
    * @param {Array} fields - List of table fields
    * @memberof Product
    */
-  constructor(records = productSchema.records, fields = productSchema.fields) {
-    super(records, fields);
+  constructor(table = productSchema.table, fields = productSchema.fields) {
+    super(table, fields);
   }
 }
