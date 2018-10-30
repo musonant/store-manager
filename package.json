@@ -5,8 +5,8 @@
   "scripts": {
     "start": "babel-node ./bin/www",
     "start:dev": "nodemon --exec babel-node ./bin/www",
-    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
-    "build": "cross-env NODE_ENV=production&&  ",
+    "test": "set NODE_ENV=test&& nyc --reporter=lcov --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "build": "cross-env NODE_ENV=production",
     "lint": "eslint --fix server",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
