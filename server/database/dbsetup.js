@@ -5,6 +5,17 @@ const debug = require('debug')('database');
 
 dotenv.config();
 
+// Ensure database is created locally using this command
+// psql -c 'create database store_manager_test' -U postgres
+// on password prompt, provide the db user password
+// The order of the tables in the queryText below is important
+
+// For DROP queries, tables whose primary keys are used as foreign key reference
+// on other tables will fail to be deleted
+// when the other tables referencing them are not deleted already.
+// So, we ensure we drop tables that reference others first before
+// attempting to drop the 'parent' tables
+
 class DB {
   constructor() {
     this.pool = new Pool({
