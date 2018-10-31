@@ -7,7 +7,7 @@ const products = [
     price: 2000,
     categoryId: 1,
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const products = [
     price: 14000,
     categoryId: 1,
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const products = [
     price: 2000,
     categoryId: 1,
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
     id: 4,
@@ -37,8 +37,8 @@ const products = [
     price: 20,
     categoryId: 1,
     createdAt: new Date(),
-    updatedAt: new Date()
-  }
+    updatedAt: new Date(),
+  },
 ];
 
 export default products;

@@ -20,14 +20,14 @@ class RoleAuth {
    * @return {Object} - error message on authentication failure
    * @memberof RoleAuth
    */
-  static isOwner(req, res, next) {
+  static async isOwner(req, res, next) {
     const { userId } = req.decoded;
-    const user = User.findById(userId);
+    const user = await User.findById(userId);
 
     if (user.userType !== 'store_owner') {
       res.status(401).send({
         status: 'Failed',
-        message: 'you have to be a store owner to make this request'
+        message: 'you have to be a store owner to make this request',
       });
     } else {
       req.user = user;
@@ -43,14 +43,14 @@ class RoleAuth {
    * @return {Object} - error message on authentication failure
    * @memberof RoleAuth
    */
-  static isAttendant(req, res, next) {
+  static async isAttendant(req, res, next) {
     const { userId } = req.decoded;
-    const user = User.findById(userId);
+    const user = await User.findById(userId);
 
     if (user.userType !== 'store_attendant') {
       res.status(401).send({
         status: 'Failed',
-        message: 'you have to be a store attendant to make this request'
+        message: 'you have to be a store attendant to make this request',
       });
     } else {
       req.user = user;
@@ -68,11 +68,11 @@ class RoleAuth {
    * @returns {Object} - error message indicating authentication failure
    * @memberof RoleAuth
    */
-  static allowRetrieve(req, res, next) {
+  static async allowRetrieve(req, res, next) {
     const { userId } = req.decoded;
     const salesId = Number(req.params.salesId);
-    const user = User.findById(userId);
-    const sale = Sales.findById(salesId);
+    const user = await User.findById(userId);
+    const sale = await Sales.findById(salesId);
 
     if (sale) {
       if ((user.id === sale.attendantId) || user.userType === 'store_owner') {
@@ -82,13 +82,13 @@ class RoleAuth {
       } else {
         res.status(403).send({
           status: 'Failed',
-          message: 'You cannot access this resource'
+          message: 'You cannot access this resource',
         });
       }
     } else {
       res.status(404).send({
         status: 'Failed',
-        message: 'Not Found'
+        message: 'Not Found',
       });
     }
   }

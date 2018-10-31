@@ -4,9 +4,7 @@ import 'babel-polyfill';
 
 const debug = require('debug')('database');
 
-
 dotenv.config();
-
 
 /**
  * This is model of a resource
@@ -22,9 +20,10 @@ export default class Model {
    * @param {Array} fields - an array of attributes defining the resource
    * @memberof Model
    */
-  constructor(table, fields) {
+  constructor(table, fields, fieldTypes) {
     this.table = table;
     this.fields = fields;
+    this.fieldTypes = fieldTypes;
     this.connection = new Pool({
       connectionString: process.env.TEST_DATABASE_URL,
     });
@@ -42,21 +41,43 @@ export default class Model {
     const queryText = `SELECT * FROM ${this.table}`;
     try {
       const resultSet = await this.connection.query(queryText);
-      console.log(resultSet.rows);
-      return resultSet;
+      return resultSet.rows;
     } catch (err) {
-      console.log(err.stack);
-      return err;
+      debug('query_error ', err.stack);
+      return err.stack;
     }
   }
 
   /**
-   * @param {*} id - the id of the resource
+   * @param {Number} id - the id of the resource
    * @returns {Object} - the found resource
    * @memberof Model
    */
-  findById(id) {
-    return this.records.find(item => item.id === id);
+  async findById(id) {
+    const queryText = `SELECT * FROM ${this.table} WHERE id = ${id}`;
+    try {
+      const resultSet = await this.connection.query(queryText);
+      return resultSet.rows[0];
+    } catch (err) {
+      debug('query_error ', err.stack);
+      return err.stack;
+    }
+  }
+
+  /**
+   * @param {Object} data - object of attribute: value
+   * @returns {Object} - the found resource
+   * @memberof Model
+   */
+  async findByFieldName(data) {
+    const queryText = `SELECT * FROM ${this.table} WHERE "${data.fieldName}" = '${data.value}'`;
+    try {
+      const resultSet = await this.connection.query(queryText);
+      return resultSet.rows[0];
+    } catch (err) {
+      debug('query_error ', err.stack);
+      return err.stack;
+    }
   }
 
   /**
@@ -68,21 +89,44 @@ export default class Model {
   async create(data) {
     const preparedData = this.prepareData(data);
     const { fieldList, fieldValues } = preparedData;
-    const queryText = `INSERT INTO ${this.table} (${fieldList}) VALUES (${fieldValues})`;
+    const queryText = `INSERT INTO ${this.table} (${fieldList}) VALUES (${fieldValues}) RETURNING *`;
     try {
       const resultSet = await this.connection.query(queryText);
       const newResource = resultSet.rows[0];
       return newResource;
     } catch (err) {
-      console.log(err.stack);
-      return err;
+      debug('query_error ', err.stack);
+      return err.stack;
     }
   }
 
+
+  /**
+   *
+   * @param {Object} data - object of table fields: values
+   */
   prepareData(data) {
-    data.forEach((item) => {
-      console.log(item);
-    });
+    const fieldList = [];
+    const fieldValues = [];
+    for (let field in data) {
+      if (this.fields.includes(field)) {
+        
+        let value;
+        if (this.fieldTypes[field] !== 'integer') {
+          value = `'${data[field]}'`;
+        } else {
+          value = data[field];
+        }
+
+        field = `"${field}"`;
+
+        fieldList.push(field);
+        fieldValues.push(value);
+      }
+    }
+
+    const preparedData = { fieldList, fieldValues };
+    return preparedData;
   }
 
   /**
@@ -91,30 +135,37 @@ export default class Model {
    * @returns {Object} - the updated resource
    * @memberof Model
    */
-  update(id, data) {
-    const foundResource = this.records.find(item => item.id === id);
-    const updatedResource = { id: foundResource.id };
+  async update(id, data) {
+    const preparedUpdateSet = this.prepareUpdateData(data);
+    const queryText = `UPDATE ${this.table} ${preparedUpdateSet} WHERE id = ${id} RETURNING *`;
 
-    this.fields.forEach((field) => {
-      if (field !== 'id') {
-        if (data[field]) {
-          updatedResource[field] = data[field];
-        } else {
-          updatedResource[field] = foundResource[field];
+    try {
+      const resultSet = await this.connection.query(queryText);
+      const updatedResource = resultSet.rows[0];
+      return updatedResource;
+    } catch (err) {
+      debug('query_error ', err.stack);
+      return err.stack;
+    }
+  }
+
+  prepareUpdateData(data) {
+    let preparedUpdateSet = 'SET ';
+    for (const field in data) {
+      if (this.fields.includes(field)) {
+        let updateFieldSet = '';
+        if (preparedUpdateSet !== 'SET ') {
+          updateFieldSet = ', ';
         }
+        if (this.fieldTypes[field] !== 'integer') {
+          updateFieldSet += `"${field}" = '${data[field]}'`;
+        } else {
+          updateFieldSet += `"${field}" = ${data[field]}`;
+        }
+        preparedUpdateSet += updateFieldSet;
       }
-    });
-
-    // update the records
-    const newRecords = this.records.map((item) => {
-      if (item.id === updatedResource.id) {
-        return updatedResource;
-      }
-      return item;
-    });
-    this.records = newRecords;
-
-    return updatedResource;
+    }
+    return preparedUpdateSet;
   }
 
   /**
@@ -122,14 +173,19 @@ export default class Model {
    * @returns {Boolean} - boolean flag showing success or failure with the delete operation
    * @memberof Model
    */
-  delete(id) {
-    const newRecords = this.records.filter(item => item.id !== id);
+  async delete(id) {
+    const queryText = `DELETE FROM ${this.table} WHERE id = ${id}`;
 
-    if (newRecords.length === this.records.length) {
+    try {
+      const result = await this.connection.query(queryText);
+      if (result.rowCount === 1) {
+        return true;
+      }
       return false;
+    } catch (err) {
+      debug('query_error ', err.stack);
+      return err.stack;
     }
-    this.records = newRecords;
-    return true;
   }
 
   /**

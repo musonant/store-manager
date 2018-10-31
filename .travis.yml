@@ -13,19 +13,12 @@ env:
 before_script:
   - npm install
   - npm install mocha-lcov-reporter --save-dev
-  - yarn global add nyc
-  - npm install 
   - npm global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  # - chmod +x ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - psql -c 'drop database if exists store_manager;' -U postgres
   - psql -c 'create database store-manager;' -U postgres
   - npm run migrate
 script:
-  - nyc --reporter=lcov yarn run test
-  - npm run test
-
-after_success:
-  - ;lsdnpm run coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - nyc --reporter=lcov npm run test

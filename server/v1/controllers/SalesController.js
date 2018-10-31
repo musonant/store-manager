@@ -1,6 +1,8 @@
 import SalesModel from '../../models/Sales';
+import SaleProductModel from '../../models/SaleProduct';
 
 const Sales = new SalesModel();
+const SaleProduct = new SaleProductModel();
 
 /**
  *This controller handles
@@ -17,29 +19,32 @@ class SalesController {
    * @returns {Object} - prepared response object
    * @memberof SalesController
    */
-  static store(req, res) {
+  static async store(req, res) {
     const { user } = req;
     const data = req.body;
     data.attendantId = user.id;
-    const sale = Sales.create(data);
+    const sale = await Sales.create(data);
     // const missingOrders = data.orders === undefined;
 
+    const saleProductData = [];
     if (data.orders !== undefined) {
       data.orders.forEach((item) => {
-        item.salesId = sale.id;
-        Sales.productPivot.push(item);
+        const order = item;
+        order.salesId = sale.id;
+        saleProductData.push(order);
       });
+      await SaleProduct.createOrders(saleProductData);
     } else {
       return res.status(400).send({
-        message: 'Your request is missing orders'
+        message: 'Your request is missing orders',
       });
     }
 
-    sale.products = Sales.getProducts(sale.id);
+    sale.products = await Sales.getProducts(sale.id);
 
     return res.status(200).send({
       status: 'Success',
-      data: sale
+      data: sale,
     });
   }
 
@@ -52,10 +57,11 @@ class SalesController {
    * @returns {Object} - prepared response object
    * @memberof SalesController
    */
-  static list(req, res) {
+  static async list(req, res) {
+    const sales = await Sales.getAllSales();
     return res.status(200).send({
       message: 'success',
-      data: Sales.getAll()
+      data: sales,
     });
   }
 
@@ -67,14 +73,14 @@ class SalesController {
    * @returns {Object} - prepared response object
    * @memberof SalesController
    */
-  static retrieve(req, res) {
+  static async retrieve(req, res) {
     const { sale } = req;
 
-    sale.products = Sales.getProducts(sale.id);
+    sale.products = await Sales.getProducts(sale.id);
 
     return res.status(200).send({
       message: 'success',
-      data: sale
+      data: sale,
     });
   }
 }

@@ -1,16 +1,15 @@
+// import { expect, request } from './test.includes';
 import { expect } from 'chai';
-import { describe } from 'mocha';
+import { describe, it } from 'mocha';
 import supertest from 'supertest';
 import app from '../app';
 
-import modelTests from './models/test';
 import productTests from './products.test';
 import salesTests from './sales.test';
 
 const request = supertest(app);
 
 // Run Tests for the Model Class and Data Model Classes
-modelTests();
 
 describe('All test cases for Store Manager API', () => {
   describe('test case for loading application home page', () => {
@@ -20,7 +19,7 @@ describe('All test cases for Store Manager API', () => {
         .expect(200)
         .end((err, res) => {
           expect(res.body).deep.equal({
-            message: 'Welcome to Store Manager API'
+            message: 'Welcome to Store Manager API',
           });
           done();
         });
