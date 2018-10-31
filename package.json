@@ -5,7 +5,8 @@
   "scripts": {
     "start": "babel-node ./bin/www",
     "start:dev": "nodemon --exec babel-node ./bin/www",
-    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "test": "cross-env NODE_ENV=test&& nyc mocha --timeout 500000 --exit server/specs/",
+    "migrate": "set DEBUG=database && babel-node server/database/dbsetup.js",
     "build": "cross-env NODE_ENV=production&&  ",
     "lint": "eslint --fix server",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
@@ -22,9 +23,13 @@
   "bugs": {
     "url": "https://github.com/musonant/store-manager/issues"
   },
-  "homepage": "https://github.com/musonant/store-manager#readme",
-  "apiServer": "https://musonant-store-manager.herokuapp.com/api/v1",
+  "links": {
+    "homepage": "https://github.com/musonant/store-manager#readme",
+    "apiServer": "https://musonant-store-manager.herokuapp.com/api/v1",
+    "pivotalTrackerProject": "https://www.pivotaltracker.com/projects/2203434/"
+  },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -32,6 +37,7 @@
     "cloudinary": "^1.11.0",
     "connect-multiparty": "^2.1.1",
     "cors": "^2.8.4",
+    "debug": "^4.1.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
@@ -41,6 +47,19 @@
     "pg": "^7.4.3",
     "supertest": "^3.1.0",
     "validator": "^10.4.0"
+  },
+  "nyc": {
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "reporter": [
+      "lcov",
+      "html",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

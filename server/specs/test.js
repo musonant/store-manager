@@ -1,5 +1,6 @@
 // import { expect, request } from './test.includes';
 import { expect } from 'chai';
+import { describe } from 'mocha';
 import supertest from 'supertest';
 import app from '../app';
 
@@ -22,7 +23,6 @@ describe('All test cases for Store Manager API', () => {
           expect(res.body).deep.equal({
             message: 'Welcome to Store Manager API'
           });
-          if (err) done(err);
           done();
         });
     });
@@ -32,7 +32,17 @@ describe('All test cases for Store Manager API', () => {
         .expect(200)
         .end((err, res) => {
           expect(res.body.message).to.equal('Store Manger API V1');
-          if (err) done(err);
+          done();
+        });
+    });
+  });
+  describe('test case for loading unavailable routes', () => {
+    it('Should load API Home', (done) => {
+      request.get('/wrongRoute')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('Page not found');
           done();
         });
     });

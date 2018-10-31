@@ -12,17 +12,13 @@ env:
   - CC_TEST_REPORTER_ID=a9114cf0437121f07a35d744703589d3996e341101052b39983a0e8221a4a7b1
 before_script:
   - npm install
-  - npm install coveralls --save-dev
   - npm install mocha-lcov-reporter --save-dev
-  - npm install supertest 
   - yarn global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - psql -c 'drop database if exists store_manager;' -U postgres
+  - psql -c 'create database store-manager;' -U postgres
+  - npm run migrate
 script:
-  - npm test
   - nyc --reporter=lcov yarn run test
-
-after_success:
-  - npm run coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
