@@ -1,5 +1,5 @@
 import Model from './Model';
-import products from '../database/products';
+import productSchema from '../migrations/products';
 
 /**
  * Handles data requests for the Product resource
@@ -10,10 +10,11 @@ import products from '../database/products';
 export default class Product extends Model {
   /**
    * Creates an instance of Product.
+   * @param {String} table - Resource table name
+   * @param {Array} fields - List of table fields
    * @memberof Product
    */
-  constructor() {
-    const fields = ['id', 'name', 'quantityStocked', 'categoryId', 'price'];
-    super(products, fields);
+  constructor(table = productSchema.table, fields = productSchema.fields) {
+    super(table, fields);
   }
 }

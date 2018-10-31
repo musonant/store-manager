@@ -31,6 +31,18 @@ const salesTests = () => {
             done();
           });
       });
+      it('Should return error when request is missing orders', (done) => {
+        const badSalesData = { customerName: 'James Arthur', totalPay: 2300 };
+        request.post('/api/v1/sales')
+          .set('x-access-token', attendantToken)
+          .send(badSalesData)
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('Your request is missing orders');
+            if (err) done(err);
+            done();
+          });
+      });
       it('Should not create sales with wrong token', (done) => {
         request.post('/api/v1/sales')
           .set('x-access-token', wrongToken)
@@ -77,7 +89,7 @@ const salesTests = () => {
             done();
           });
       });
-      it('Should not get sales with wrong token', (done) => {
+      it('Should not get all sales with wrong token', (done) => {
         request.get('/api/v1/sales')
           .set('x-access-token', wrongToken)
           .expect(401)
@@ -87,7 +99,7 @@ const salesTests = () => {
             done();
           });
       });
-      it('Should not get sales if not store owner', (done) => {
+      it('Should not get all sales if not store owner', (done) => {
         request.get('/api/v1/sales')
           .set('x-access-token', attendantToken)
           .expect(401)
@@ -97,7 +109,7 @@ const salesTests = () => {
             done();
           });
       });
-      it('Should return sales with satisfactory requirements', (done) => {
+      it('Should return all sales with satisfactory requirements', (done) => {
         request.get('/api/v1/sales')
           .set('x-access-token', ownerToken)
           .expect(200)
@@ -107,7 +119,7 @@ const salesTests = () => {
           });
       });
     });
-    describe('Test case for get a specific sales', () => {
+    describe('Test case for get a specific sale', () => {
       it('Should not get sale record if not authenticated', (done) => {
         request.get(`/api/v1/sales/${attendantSaleId}`)
           .expect(401)
@@ -135,6 +147,15 @@ const salesTests = () => {
             expect(res.body.message).to.equal('You cannot access this resource');
             if (err) done(err);
             done();
+          });
+      });
+      it('Should return error on sale not found', (done) => {
+        request.get('/api/v1/sales/0')
+          .set('x-access-token', attendantToken)
+          .expect(404)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('Not Found');
+            done(err);
           });
       });
       it('Should return sale record on satisfactory requirements', (done) => {

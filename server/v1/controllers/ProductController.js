@@ -20,7 +20,7 @@ class ProductController {
   static list(req, res) {
     return res.status(200).send({
       message: 'success',
-      data: Product.getAll()
+      data: Product.getAll(),
     });
   }
 
@@ -37,7 +37,7 @@ class ProductController {
 
     return res.status(200).send({
       message: 'success',
-      data: product
+      data: product,
     });
   }
 
@@ -54,12 +54,12 @@ class ProductController {
     const product = Product.findById(id);
     if (!product) {
       return res.status(404).send({
-        message: 'Not Found'
+        message: 'Not Found',
       });
     }
     return res.status(200).send({
       message: 'success',
-      data: product
+      data: product,
     });
   }
 }

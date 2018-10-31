@@ -1,6 +1,6 @@
 import Model from './Model';
-import records from '../database/sales';
-import products from '../database/products';
+import saleSchema from '../migrations/sales';
+import productSchema from '../migrations/products';
 import saleProduct from '../database/sale_product';
 
 /**
@@ -13,9 +13,10 @@ export default class Sales extends Model {
   /**
    * Creates an instance of Sales.
    * @memberof Sales
+   * @param {Array} records - List of existing records
+   * @param {Array} fields - List of table fields
    */
-  constructor() {
-    const fields = ['id', 'attendantId', 'customerName', 'createdAt', 'totalPay'];
+  constructor(records = saleSchema.records, fields = saleSchema.fields) {
     super(records, fields);
     this.productPivot = saleProduct;
   }
@@ -35,6 +36,7 @@ export default class Sales extends Model {
     });
 
     const productsArray = [];
+    const products = productSchema.records;
 
     productIdArray.forEach((id) => {
       productsArray.push(products.find(item => item.id === id));
