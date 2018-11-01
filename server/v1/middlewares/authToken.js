@@ -1,5 +1,6 @@
 // import tokens from '../../database/tokens';
 import UserTokenModel from '../../models/UserToken';
+import jwt from 'jsonwebtoken';
 
 const UserToken = new UserTokenModel();
 
