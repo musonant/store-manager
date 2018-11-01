@@ -918,6 +918,7 @@ table {
 }
 .table-item {
   font-family: "gothic";
+  margin: 10px;
 }
 tr {
   border-bottom: 1px solid #ddd;
