@@ -7,7 +7,7 @@ const v1Router = Router();
 
 v1Router.use('/products', productRouter);
 v1Router.use('/sales', salesRouter);
-v1Router.use('/auth/signup', usersRouter);
+v1Router.use('/auth', usersRouter);
 
 // Matches /api the API home route
 v1Router.get('/', (req, res) => {
