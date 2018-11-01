@@ -191,8 +191,10 @@ export default class Model {
    * @returns {Object} - the id of the last item on the table
    * @memberof Model
    */
-  getLastId() {
-    const lastItem = this.records[this.records.length - 1];
-    return lastItem.id;
+  async getLastId() {
+    // const lastItem = this.records[this.records.length - 1];
+    // return lastItem.id;
+
+    const lastItem = this.getAll();
   }
 }
