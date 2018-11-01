@@ -14,7 +14,7 @@ v1Router.get('/', (req, res) => {
   res.status(200).send({
     url: `${req.protocol}://${req.headers.host}`,
     status: 'success',
-    message: 'Store Manger API V1'
+    message: 'Store Manger API V1',
   });
 });
 

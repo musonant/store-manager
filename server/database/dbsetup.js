@@ -8,7 +8,7 @@ dotenv.config();
 class DB {
   constructor() {
     this.connection = new Pool({
-      connectionString: process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production',
+      connectionString: process.env.TEST_DATABASE_URL,
     });
   }
 

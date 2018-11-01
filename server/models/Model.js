@@ -109,7 +109,6 @@ export default class Model {
     const fieldValues = [];
     for (let field in data) {
       if (this.fields.includes(field)) {
-        
         let value;
         if (this.fieldTypes[field] !== 'integer') {
           value = `'${data[field]}'`;
