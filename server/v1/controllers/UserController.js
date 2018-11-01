@@ -1,6 +1,6 @@
 import UserModel from '../../models/User';
 
-const User = new UserModel();
+// const User = new UserModel();
 
 class UserController {
 
