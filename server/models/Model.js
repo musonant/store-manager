@@ -1,6 +1,5 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-import 'babel-polyfill';
 
 const debug = require('debug')('database');
 
