@@ -195,6 +195,6 @@ export default class Model {
     // const lastItem = this.records[this.records.length - 1];
     // return lastItem.id;
 
-    const lastItem = this.getAll();
+    // const lastItem = this.getAll();
   }
 }
