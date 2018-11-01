@@ -5,15 +5,19 @@ const debug = require('debug')('database');
 
 dotenv.config();
 
+debug('NODE_ENV', process.env.NODE_ENV);
+
+const DB_URL = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV !== 'production'
+  ? process.env.DATABASE_URL : process.env.TEST_DATABASE_URL;
 class DB {
   constructor() {
     this.connection = new Pool({
-      connectionString: process.env.TEST_DATABASE_URL,
+      connectionString: DB_URL,
     });
   }
 
   async createTables() {
-    debug('CONNECTING TO DATABASE');
+    debug('CONNECTING TO DATABASE: DATABASE URL', DB_URL);
     this.connection.on('connect', () => {
       debug('CONNECTED TO DATABASE');
     });
