@@ -8,7 +8,7 @@ dotenv.config();
 class DB {
   constructor() {
     this.connection = new Pool({
-      connectionString: process.env.TEST_DATABASE_URL,
+      connectionString: process.env.DATABASE_URL,
     });
   }
 
