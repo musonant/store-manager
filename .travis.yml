@@ -10,6 +10,8 @@ services:
 env:
   global:
   - CC_TEST_REPORTER_ID=a9114cf0437121f07a35d744703589d3996e341101052b39983a0e8221a4a7b1
+  - SECRET_KEY=GROWING@ANDELA
+  - NODE_ENV=staging
 before_script:
   - npm install
   - npm install mocha-lcov-reporter --save-dev
