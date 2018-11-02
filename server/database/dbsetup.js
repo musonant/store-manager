@@ -2,18 +2,30 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const debug = require('debug')('database');
+const bcrypt = require('bcryptjs');
 
 dotenv.config();
 
+const dbConfig = {
+  staging: process.env.DATABASE_URL,
+  production: process.env.DATABASE_URL,
+  test: process.env.TEST_DATABASE_URL,
+};
+
+const environment = process.env.NODE_ENV.trim();
+
+debug('NODE_ENV', environment);
+
+const DB_URL = dbConfig[environment];
 class DB {
   constructor() {
     this.connection = new Pool({
-      connectionString: process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production',
+      connectionString: DB_URL,
     });
   }
 
   async createTables() {
-    debug('CONNECTING TO DATABASE');
+    debug('CONNECTING TO DATABASE: DATABASE URL', DB_URL);
     this.connection.on('connect', () => {
       debug('CONNECTED TO DATABASE');
     });
@@ -30,6 +42,7 @@ class DB {
         "id" SERIAL PRIMARY KEY NOT NULL,
         "userType" varchar(25) NOT NULL,
         "email" varchar(100) NOT NULL,
+        "password" varchar(100) NOT NULL,
         "username" varchar(100),
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -81,12 +94,13 @@ class DB {
   }
 
   async seedTables() {
+    const saltRounds = 10;
     const queryText = `
-      INSERT INTO users ("userType", "email") VALUES ('store_owner', 'owner@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant1@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant2@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant3@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant4@store.demo');
+      INSERT INTO users ("userType", "email", "password") VALUES ('store_owner', 'owner@store.demo', '${bcrypt.hashSync('owner@store', saltRounds)}');
+      INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant1@store.demo', '${bcrypt.hashSync('attendant1@store', saltRounds)}');
+      INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant2@store.demo', '${bcrypt.hashSync('attendant2@store', saltRounds)}');
+      INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant3@store.demo', '${bcrypt.hashSync('attendant3@store', saltRounds)}');
+      INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant4@store.demo', '${bcrypt.hashSync('attendant4@store', saltRounds)}');
 
       INSERT INTO product_categories ("name") VALUES ('Furniture');
       INSERT INTO product_categories ("name") VALUES ('Stationaries');
