@@ -8,7 +8,7 @@ dotenv.config();
 class DB {
   constructor() {
     this.connection = new Pool({
-      connectionString: process.env.TEST_DATABASE_URL,
+      connectionString: postgres://vuwtqvfwquqzgy:488143e9b9c7946f5b51683ac2d7694b4b96b80daccfd56280033f26d24c8c53@ec2-54-225-115-234.compute-1.amazonaws.com:5432/dai06kmflppvsj;
     });
   }
 
