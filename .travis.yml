@@ -1,7 +1,7 @@
 sudo: required
 language: node_js
 node_js:
-  - "node"
+  - "8.11.2"
 cache:
   directories:
     - "node_modules"
@@ -13,19 +13,15 @@ env:
 before_script:
   - npm install
   - npm install mocha-lcov-reporter --save-dev
-  - yarn global add nyc
-  - npm install 
-  - npm global add nyc
+  - npm install -g nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  # - chmod +x ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - psql -c 'drop database if exists store_manager;' -U postgres
-  - psql -c 'create database store-manager;' -U postgres
-  - npm run migrate
+  - psql -c 'create database store_manager;' -U postgres
 script:
-  - nyc --reporter=lcov yarn run test
-  - npm run test
+  - nyc --reporter=lcov npm run test
 
 after_success:
-  - ;lsdnpm run coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm run coverage
+  - ./cc-test-reporter after-build --exit code $TRAVIS_TEST_RESULT

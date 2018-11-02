@@ -1,3 +1,4 @@
+import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import supertest from 'supertest';
 import app from '../app';
@@ -18,8 +19,8 @@ const salesTests = () => {
         totalPay: 2300,
         orders: [
           { productId: 1, quantity: 2 },
-          { productId: 2, quantity: 3 }
-        ]
+          { productId: 2, quantity: 3 },
+        ],
       };
       it('Should not create sales if not authenticated', (done) => {
         request.post('/api/v1/sales')

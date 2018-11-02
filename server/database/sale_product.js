@@ -7,17 +7,17 @@ const saleProduct = [
   {
     salesId: 1,
     productId: 1,
-    quantity: 1
+    quantity: 1,
   },
   {
     salesId: 2,
     productId: 2,
-    quantity: 1
+    quantity: 1,
   },
   {
     salesId: 2,
     productId: 3,
-    quantity: 1
+    quantity: 1,
   },
 ];
 

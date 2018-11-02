@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store",
   "scripts": {
-    "start": "babel-node ./bin/www",
+    "start": "npm run migrate:staging && babel-node ./bin/www",
     "start:dev": "nodemon --exec babel-node ./bin/www",
-    "test": "cross-env NODE_ENV=test&& nyc mocha --timeout 500000 --exit server/specs/",
-    "build": "cross-env NODE_ENV=production",
+    "test": "cross-env NODE_ENV=test && npm run migrate && nyc report --reporter=html --reporter=text mocha --timeout 500000 --exit --require babel-register server/specs/",
+    "migrate": "cross-env DEBUG=database && babel-node server/database/dbsetup.js",
+    "migrate:staging": "cross-env DEBUG=database && cross-env NODE_ENV=staging && babel-node server/database/dbsetup.js",
+    "build": "cross-env NODE_ENV=production &&  ",
     "lint": "eslint --fix server",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "engines": {
-    "node": "8.9.4"
+    "node": "8.11.2"
   },
   "repository": {
     "type": "git",
@@ -27,26 +29,6 @@
     "apiServer": "https://musonant-store-manager.herokuapp.com/api/v1",
     "pivotalTrackerProject": "https://www.pivotaltracker.com/projects/2203434/"
   },
-  "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "babel-register": "^6.26.0",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "chai": "^4.1.2",
-    "cloudinary": "^1.11.0",
-    "connect-multiparty": "^2.1.1",
-    "cors": "^2.8.4",
-    "dotenv": "^6.1.0",
-    "debug": "^4.1.0",
-    "express": "^4.16.3",
-    "jsonwebtoken": "^8.3.0",
-    "mocha": "^5.2.0",
-    "node-cron": "^1.2.1",
-    "nodemailer": "^4.6.8",
-    "pg": "^7.6.0",
-    "supertest": "^3.1.0",
-    "validator": "^10.4.0"
-  },
   "nyc": {
     "require": [
       "babel-register",
@@ -60,6 +42,26 @@
     "sourceMap": false,
     "instrument": false
   },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "cloudinary": "^1.11.0",
+    "connect-multiparty": "^2.1.1",
+    "cors": "^2.8.4",
+    "debug": "^4.1.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mocha": "^5.2.0",
+    "node-cron": "^1.2.1",
+    "nodemailer": "^4.6.8",
+    "pg": "^7.4.3",
+    "supertest": "^3.1.0",
+    "validator": "^10.4.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -68,7 +70,6 @@
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
-    "make-runnable": "^1.3.6",
     "nodemon": "^1.18.3",
     "nyc": "^12.0.2"
   }

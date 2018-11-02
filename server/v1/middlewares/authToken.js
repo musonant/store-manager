@@ -1,4 +1,4 @@
-import tokens from '../../database/tokens';
+import jwt from 'jsonwebtoken';
 
 /**
  * Authenticate a user
@@ -16,24 +16,27 @@ class AuthToken {
    * @return {Object} - error message on authentication failure
    * @memberof AuthToken
    */
-  static authenticate(req, res, next) {
+  static async authenticate(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    const tokenFound = tokens.find(item => item.token === token);
 
     if (token) {
-      if (!tokenFound) {
-        res.status(401).send({
-          status: 'Failed',
-          message: 'wrong token'
-        });
-      } else {
-        req.decoded = tokenFound;
-        next();
-      }
+      jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+          res.status(401);
+          res.json({
+            status: 'Failed',
+            message: 'Authentication failed. Token is either invalid or expired',
+          });
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
     } else {
-      res.status(401).send({
+      res.status(403);
+      res.json({
         status: 'Failed',
-        message: 'missing token'
+        message: 'wrong token. provide  a valid token',
       });
     }
   }

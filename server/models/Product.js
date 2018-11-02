@@ -12,9 +12,14 @@ export default class Product extends Model {
    * Creates an instance of Product.
    * @param {String} table - Resource table name
    * @param {Array} fields - List of table fields
+   * @param {Array} fieldTypes - List of table field types
    * @memberof Product
    */
-  constructor(table = productSchema.table, fields = productSchema.fields) {
-    super(table, fields);
+  constructor(
+    table = productSchema.table,
+    fields = productSchema.fields,
+    fieldsTypes = productSchema.fieldTypes,
+  ) {
+    super(table, fields, fieldsTypes);
   }
 }
