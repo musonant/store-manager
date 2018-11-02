@@ -26,9 +26,7 @@ export default class Model {
     this.connection = new Pool({
       connectionString: process.env.TEST_DATABASE_URL,
     });
-    debug('CONNECTING TO DATABASE');
     this.connection.on('connect', () => {
-      debug('CONNECTED TO DATABASE');
     });
   }
 
@@ -109,7 +107,6 @@ export default class Model {
     const fieldValues = [];
     for (let field in data) {
       if (this.fields.includes(field)) {
-        
         let value;
         if (this.fieldTypes[field] !== 'integer') {
           value = `'${data[field]}'`;

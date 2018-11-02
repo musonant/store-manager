@@ -6,13 +6,32 @@ import app from '../app';
 const request = supertest(app);
 
 const wrongToken = 'OPsdecedsaec00e2349__dL';
-const attendantToken = 'OPsdecedsaec00e23490LdL';
-// const wrongAttendantToken = 'KLcxdwedsaecd3e23490LdL';
-// const attendantSaleId = 1;
-const ownerToken = 'xcmr2ewesaec00e23490LdL';
 
+const owner = {
+  password: 'owner@store',
+  email: 'owner@store.demo',
+};
+const attendant = {
+  password: 'attendant1@store',
+  email: 'attendant1@store.demo',
+};
+let ownerToken;
+let attendantToken;
 const productTests = () => {
   describe('Test cases for Products Resource', () => {
+    before((done) => {
+      request.post('/api/v1/auth/login')
+        .send({ email: owner.email, password: owner.password })
+        .end((err, res) => {
+          ownerToken = res.body.token;
+        });
+      request.post('/api/v1/auth/login')
+        .send({ email: attendant.email, password: attendant.password })
+        .end((err, res) => {
+          attendantToken = res.body.token;
+          done();
+        });
+    });
     describe('Test cases for getting products', () => {
       it('Should return all products', (done) => {
         request.get('/api/v1/products')
@@ -20,7 +39,6 @@ const productTests = () => {
           .expect(200)
           .end((err, res) => {
             expect(res.body.message).to.equal('success');
-            if (err) done(err);
             done();
           });
       });
@@ -40,7 +58,6 @@ const productTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.message).to.equal('you have to be a store owner to make this request');
-            if (err) done(err);
             done();
           });
       });
@@ -50,8 +67,7 @@ const productTests = () => {
           .send(productData)
           .expect(401)
           .end((err, res) => {
-            expect(res.body.message).to.equal('wrong token');
-            if (err) done(err);
+            expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
             done();
           });
       });
@@ -61,7 +77,6 @@ const productTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.message).to.equal('missing token');
-            if (err) done(err);
             done();
           });
       });
@@ -73,7 +88,6 @@ const productTests = () => {
           .end((err, res) => {
             expect(res.body.message).to.equal('success');
             expect(res.body.data.name).to.equal('New Book');
-            if (err) done(err);
             done();
           });
       });
@@ -84,7 +98,6 @@ const productTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.message).to.equal('missing token');
-            if (err) done(err);
             done();
           });
       });
@@ -93,8 +106,7 @@ const productTests = () => {
           .set('x-access-token', wrongToken)
           .expect(401)
           .end((err, res) => {
-            expect(res.body.message).to.equal('wrong token');
-            if (err) done(err);
+            expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
             done();
           });
       });
@@ -112,7 +124,6 @@ const productTests = () => {
           .send(productData)
           .end((err, res) => {
             newProduct = res.body.data;
-            if (err) done(err);
             done();
           });
       });
@@ -123,7 +134,6 @@ const productTests = () => {
           .expect(200)
           .end((err, res) => {
             expect(res.body.data.name).to.equal('Book');
-            if (err) done(err);
             done();
           });
       });
@@ -134,7 +144,6 @@ const productTests = () => {
           .expect(404)
           .end((err, res) => {
             expect(res.body.message).to.equal('Not Found');
-            if (err) done(err);
             done();
           });
       });

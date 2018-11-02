@@ -1,7 +1,4 @@
-// import tokens from '../../database/tokens';
-import UserTokenModel from '../../models/UserToken';
-
-const UserToken = new UserTokenModel();
+import jwt from 'jsonwebtoken';
 
 /**
  * Authenticate a user
@@ -21,20 +18,23 @@ class AuthToken {
    */
   static async authenticate(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    const tokenFound = await UserToken.findByFieldName({ fieldName: 'token', value: token });
 
     if (token) {
-      if (!tokenFound) {
-        res.status(401).send({
-          status: 'Failed',
-          message: 'wrong token',
-        });
-      } else {
-        req.decoded = tokenFound;
-        next();
-      }
+      jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+          res.status(401);
+          res.json({
+            status: 'Failed',
+            message: 'Authentication failed. Token is either invalid or expired',
+          });
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
     } else {
-      res.status(401).send({
+      res.status(403);
+      res.json({
         status: 'Failed',
         message: 'missing token',
       });

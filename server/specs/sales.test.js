@@ -1,18 +1,50 @@
-import { describe, it } from 'mocha';
+import { describe, it, before } from 'mocha';
 import { expect } from 'chai';
 import supertest from 'supertest';
 import app from '../app';
 
 const request = supertest(app);
 
-const wrongToken = 'OPsdecedsaec00e2349__dL';
-const attendantToken = 'OPsdecedsaec00e23490LdL';
-const wrongAttendantToken = 'KLcxdwedsaecd3e23490LdL';
 const attendantSaleId = 1;
-const ownerToken = 'xcmr2ewesaec00e23490LdL';
+
+const wrongToken = 'OPsdecedsaec00e2349__dL';
+
+const owner = {
+  password: 'owner@store',
+  email: 'owner@store.demo',
+};
+const attendant = {
+  password: 'attendant1@store',
+  email: 'attendant1@store.demo',
+};
+const wrongAttendant = {
+  password: 'attendant2@store',
+  email: 'attendant2@store.demo',
+};
+let ownerToken;
+let attendantToken;
+let wrongAttendantToken;
 
 const salesTests = () => {
   describe('Test cases for Sales', () => {
+    before((done) => {
+      request.post('/api/v1/auth/login')
+        .send({ email: owner.email, password: owner.password })
+        .end((err, res) => {
+          ownerToken = res.body.token;
+        });
+      request.post('/api/v1/auth/login')
+        .send({ email: attendant.email, password: attendant.password })
+        .end((err, res) => {
+          attendantToken = res.body.token;
+        });
+      request.post('/api/v1/auth/login')
+        .send({ email: wrongAttendant.email, password: wrongAttendant.password })
+        .end((err, res) => {
+          wrongAttendantToken = res.body.token;
+          done();
+        });
+    });
     describe('Test case for Create Sales', () => {
       const salesData = {
         customerName: 'James Arthur',
@@ -28,7 +60,6 @@ const salesTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.status).to.equal('Failed');
-            if (err) done(err);
             done();
           });
       });
@@ -40,7 +71,6 @@ const salesTests = () => {
           .expect(400)
           .end((err, res) => {
             expect(res.body.message).to.equal('Your request is missing orders');
-            if (err) done(err);
             done();
           });
       });
@@ -50,8 +80,7 @@ const salesTests = () => {
           .send(salesData)
           .expect(401)
           .end((err, res) => {
-            expect(res.body.message).to.equal('wrong token');
-            if (err) done(err);
+            expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
             done();
           });
       });
@@ -62,7 +91,6 @@ const salesTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.message).to.equal('you have to be a store attendant to make this request');
-            if (err) done(err);
             done();
           });
       });
@@ -75,7 +103,6 @@ const salesTests = () => {
           .end((err, res) => {
             expect(res.body.data.products.length).to.equal(2);
             expect(res.body.data.totalPay).to.equal(2300);
-            // if (err) done(err);
             done(err);
           });
       });
@@ -86,7 +113,6 @@ const salesTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.status).to.equal('Failed');
-            if (err) done(err);
             done();
           });
       });
@@ -95,8 +121,7 @@ const salesTests = () => {
           .set('x-access-token', wrongToken)
           .expect(401)
           .end((err, res) => {
-            expect(res.body.message).to.equal('wrong token');
-            if (err) done(err);
+            expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
             done();
           });
       });
@@ -106,7 +131,6 @@ const salesTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.message).to.equal('you have to be a store owner to make this request');
-            if (err) done(err);
             done();
           });
       });
@@ -126,7 +150,6 @@ const salesTests = () => {
           .expect(401)
           .end((err, res) => {
             expect(res.body.status).to.equal('Failed');
-            if (err) done(err);
             done();
           });
       });
@@ -135,8 +158,7 @@ const salesTests = () => {
           .set('x-access-token', wrongToken)
           .expect(401)
           .end((err, res) => {
-            expect(res.body.message).to.equal('wrong token');
-            if (err) done(err);
+            expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
             done();
           });
       });
@@ -146,7 +168,6 @@ const salesTests = () => {
           .expect(403)
           .end((err, res) => {
             expect(res.body.message).to.equal('You cannot access this resource');
-            if (err) done(err);
             done();
           });
       });
