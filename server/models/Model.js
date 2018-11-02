@@ -24,7 +24,7 @@ export default class Model {
     this.fields = fields;
     this.fieldTypes = fieldTypes;
     this.connection = new Pool({
-      connectionString: process.env.TEST_DATABASE_URL,
+      connectionString: process.env.DATABASE_URL,
     });
     debug('CONNECTING TO DATABASE');
     this.connection.on('connect', () => {

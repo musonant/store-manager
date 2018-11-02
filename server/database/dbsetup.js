@@ -12,6 +12,7 @@ class DB {
     });
   }
 
+
   async createTables() {
     debug('CONNECTING TO DATABASE');
     this.connection.on('connect', () => {
