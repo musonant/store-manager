@@ -8,7 +8,6 @@
     "test": "npm run migrate && nyc report --reporter=html --reporter=text mocha --timeout 500000 --exit --require babel-register server/specs/",
     "migrate": "babel-node server/database/dbsetup.js",
     "migrate:staging": "babel-node server/database/dbsetup.js",
-    "build": "export NODE_ENV=production &&  ",
     "lint": "eslint --fix server",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
