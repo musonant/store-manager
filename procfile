@@ -1,2 +1,1 @@
-worker: env NODE_ENV=staging
 web:npm run start
