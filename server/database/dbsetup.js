@@ -1,6 +1,7 @@
 
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
 import { DB_URL } from './config';
 
 const debug = require('debug')('database');
@@ -36,6 +37,7 @@ class DB {
         "userType" varchar(25) NOT NULL,
         "email" varchar(100) NOT NULL,
         "username" varchar(100),
+        "password" varchar(100),
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
       );
@@ -73,12 +75,6 @@ class DB {
         "userId" integer REFERENCES users(id) NOT NULL,
         "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
       );
-      CREATE TABLE IF NOT EXISTS user_tokens (
-        "id" SERIAL PRIMARY KEY NOT NULL,
-        "token" varchar(40) NOT NULL,
-        "userId" integer REFERENCES users(id) NOT NULL,
-        "createdAt" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
-      );
     `;
 
     await this.connection.query(queryText);
@@ -86,12 +82,14 @@ class DB {
   }
 
   async seedTables() {
+    const saltRounds = 10;
     const queryText = `
-      INSERT INTO users ("userType", "email") VALUES ('store_owner', 'owner@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant1@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant2@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant3@store.demo');
-      INSERT INTO users ("userType", "email") VALUES ('store_attendant', 'attendant4@store.demo');
+    INSERT INTO users ("userType", "email", "password") VALUES ('store_owner', 'owner@store.demo', '${bcrypt.hashSync('owner@store', saltRounds)}');
+    INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant1@store.demo', '${bcrypt.hashSync('attendant1@store', saltRounds)}');
+    INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant2@store.demo', '${bcrypt.hashSync('attendant2@store', saltRounds)}');
+    INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant3@store.demo', '${bcrypt.hashSync('attendant3@store', saltRounds)}');
+    INSERT INTO users ("userType", "email", "password") VALUES ('store_attendant', 'attendant4@store.demo', '${bcrypt.hashSync('attendant4@store', saltRounds)}');
+
 
       INSERT INTO product_categories ("name") VALUES ('Furniture');
       INSERT INTO product_categories ("name") VALUES ('Stationaries');
@@ -117,12 +115,6 @@ class DB {
       ) VALUES (
         'Erazer', 'A new one', 3, 100, 2
       );
-
-      INSERT INTO user_tokens ("userId", "token") VALUES (1, 'xcmr2ewesaec00e23490LdL');
-      INSERT INTO user_tokens ("userId", "token") VALUES (2, 'OPsdecedsaec00e23490LdL');
-      INSERT INTO user_tokens ("userId", "token") VALUES (3, 'KLcxdwedsaecd3e23490LdL');
-      INSERT INTO user_tokens ("userId", "token") VALUES (4, 'RcexdwedsaE233e23490LdL');
-      INSERT INTO user_tokens ("userId", "token") VALUES (5, 'xcexdwedsaec00e23490LdL');
 
       INSERT INTO sales (
         "attendantId", "customerName", "totalPay"

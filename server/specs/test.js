@@ -1,3 +1,4 @@
+// import { expect, request } from './test.includes';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import supertest from 'supertest';
@@ -7,8 +8,6 @@ import productTests from './products.test';
 import salesTests from './sales.test';
 
 const request = supertest(app);
-
-// Run Tests for the Model Class and Data Model Classes
 
 describe('All test cases for Store Manager API', () => {
   describe('test case for loading application home page', () => {
