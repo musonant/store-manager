@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run migrate:staging && babel-node ./bin/www",
     "start:dev": "set DEBUG=database&& npm run migrate && nodemon --exec babel-node ./bin/www",
-    "test": "cross-env NODE_ENV=staging&&npm run migrate && nyc mocha --timeout 500000 --exit --require babel-register mocha server/specs/",
+    "test": "cross-env NODE_ENV=staging&&npm run migrate && nyc mocha --timeout 500000 --exit server/specs/",
     "test:dev": "set NODE_ENV=test&&npm run migrate && nyc mocha --timeout 500000 --exit server/specs/",
     "migrate": "babel-node server/database/dbsetup.js",
     "migrate:staging": "babel-node server/database/dbsetup.js",
