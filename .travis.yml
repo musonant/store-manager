@@ -2,9 +2,6 @@ sudo: required
 language: node_js
 node_js:
   - "8.11.2"
-cache:
-  directories:
-    - "node_modules"
 services:
   - postgresql
 env:
@@ -16,6 +13,8 @@ before_script:
   - npm install
   - npm install mocha-lcov-reporter --save-dev
   - npm install -g nyc
+  - npm install -g cross-env
+  - npm install -g babel-cli
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
