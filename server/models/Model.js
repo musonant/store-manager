@@ -1,5 +1,5 @@
-import { Pool } from 'pg';
 import dotenv from 'dotenv';
+import dbConnection from '../database/config';
 
 const debug = require('debug')('database');
 
@@ -23,13 +23,7 @@ export default class Model {
     this.table = table;
     this.fields = fields;
     this.fieldTypes = fieldTypes;
-    this.connection = new Pool({
-      connectionString: process.env.DATABASE_URL,
-    });
-    debug('CONNECTING TO DATABASE');
-    this.connection.on('connect', () => {
-      debug('CONNECTED TO DATABASE');
-    });
+    this.connection = dbConnection;
   }
 
   /**
