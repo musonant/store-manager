@@ -36,7 +36,7 @@ class AuthToken {
       res.status(403);
       res.json({
         status: 'Failed',
-        message: 'wrong token. provide  a valid token',
+        message: 'missing token',
       });
     }
   }

@@ -31,9 +31,11 @@ class AuthController {
     `;
     try {
       const resultSet = await User.connection.query(queryText);
-      // using || {} allows user.password not to error when no rows return
-      const user = resultSet.rows[0] || {};
-      const passwordMatched = bcrypt.compareSync(password, user.password);
+      const user = resultSet.rows[0];
+      let passwordMatched = false;
+      if (user) {
+        passwordMatched = bcrypt.compareSync(password, user.password);
+      }
       if (!passwordMatched) {
         return res.status(401).send({
           message: 'Failed',
