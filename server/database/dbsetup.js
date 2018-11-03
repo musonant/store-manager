@@ -12,9 +12,10 @@ const DB_URL = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV !== 'p
 class DB {
   constructor() {
     this.connection = new Pool({
-      connectionString: DB_URL,
+      connectionString: process.env.DATABASE_URL,
     });
   }
+
 
   async createTables() {
     debug('CONNECTING TO DATABASE: DATABASE URL', DB_URL);
